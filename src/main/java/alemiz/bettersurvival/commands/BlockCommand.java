@@ -12,9 +12,9 @@ public class BlockCommand extends Command {
     public Troller loader;
 
     public BlockCommand(String name, Troller loader) {
-        super(name, "Troll player and spawn blocks around him", "");
+        super(name, "Troll người chơi và spawm block gần họ", "");
 
-        this.usage = "§7/block <player> <block id>: Troll player and spawn blocks around him";
+        this.usage = "§7/block <player> <block id>: Troll người chơi và spawm block gần họ";
         this.setUsage(getUsageMessage());
 
         this.ignoreInHelpTexts = true;

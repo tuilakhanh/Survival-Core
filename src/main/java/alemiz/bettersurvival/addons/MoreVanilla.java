@@ -69,52 +69,51 @@ public class MoreVanilla extends Addon{
             configFile.set("enable", true);
 
             configFile.set("keepInvCommand", true);
-            configFile.set("keepInventoryMessage", "§6»§7You have turned KeepInventory §6{state}§7!");
+            configFile.set("keepInventoryMessage", "§6»§7Bạn đã bật KeepIventory §6{state}§7!");
             configFile.set("permission-keepInvAll", "bettersurvival.vanilla.keepinvall");
             configFile.set("permission-keepinvTools", "bettersurvival.vanilla.keepinvtools");
 
-            configFile.set("chatFormat", "§6{player} §7> {message}");
-            configFile.set("playerNotFound", "§6»§7Player was not found!");
+            configFile.set("playerNotFound", "§6»§7Không tìm thấy người chơi!");
             configFile.set("permission-manage", "bettersurvival.vanilla.manage");
 
             configFile.set("permission-fly", "bettersurvival.fly");
-            configFile.set("flyMessage", "§6»§7Flying mode has been turned §6{state}§7!");
+            configFile.set("flyMessage", "§6»§7Bạn đã bật Fly §6{state}§7!");
 
             configFile.set("permission-tpa", "bettersurvival.tpa");
-            configFile.set("tpaMessage", "§6»§7Teleport request was sent to @{player}§7!");
-            configFile.set("tpaRequestMessage", "§6»§7Player @{player}§7 wants teleport to you. Write §8/tpa a§7!");
-            configFile.set("tpaAcceptMessage", "§6»§7Player @{player}§7 accepted your request!");
-            configFile.set("tpaDennyMessage", "§6»§7Player @{player}§7 denied your request!");
-            configFile.set("tpaDennyConfirmMessage", "§6»§7You denied teleport request!");
-            configFile.set("tpaNoRequests", "§6»§7You dont have any requests!");
+            configFile.set("tpaMessage", "§6»§7Yêu cầu dịch chuyển đã được gửi tới {player}§7!");
+            configFile.set("tpaRequestMessage", "§6»§7Người chơi {player}§7 muốn dịch chuyển đến bạn. Đê chấp nhận bấm §8/tpa a§7!");
+            configFile.set("tpaAcceptMessage", "§6»§7Người chơi {player}§7 đã chấp nhận yêu cầu!");
+            configFile.set("tpaDennyMessage", "§6»§7Người chơi {player}§7 đã từ chối yêu cầu!");
+            configFile.set("tpaDennyConfirmMessage", "§6»§7Bạn đã từ chối yêu cầu dịch chuyển!");
+            configFile.set("tpaNoRequests", "§6»§7Bạn không có yêu cầu nào!");
 
             configFile.set("permission-heal", "bettersurvival.heal");
-            configFile.set("healMessage", "§6»§7You was healed!");
+            configFile.set("healMessage", "§6»§7Bạn đã nhận được hồi máu!");
 
             configFile.set("permission-back", "bettersurvival.back");
-            configFile.set("backMessage", "§6»§7You was teleported back to your death position!");
-            configFile.set("backPosNotFound", "§6»§7You dont have saved any death position!");
+            configFile.set("backMessage", "§6»§7Quay về địa điểm đã chết!");
+            configFile.set("backPosNotFound", "§6»§7Bạn không có địa điểm đã chết nào!");
 
             configFile.set("permission-feed", "bettersurvival.feed");
-            configFile.set("feedMessage", "§6»§7Your feed level has been increased to {state}!");
+            configFile.set("feedMessage", "§6»§7Thanh thức ăn đã được tăng lên {state} mức!");
 
             configFile.set("permission-near", "bettersurvival.near");
-            configFile.set("nearMessage", "§6»§7Players near you: §6{players}§7!");
+            configFile.set("nearMessage", "§6»§7Người chơi ở gần bạn: §6{players}§7!");
 
             configFile.set("permission-jump", "bettersurvival.jump");
             configFile.set("jumpMessage", "§6Woosh!");
             configFile.set("jumpPower", 1.5);
 
             configFile.set("permission-randtp", "bettersurvival.randtp");
-            configFile.set("randtpMessage", "§6»§7You was teleported to random location!");
+            configFile.set("randtpMessage", "§6»§7Bạn đã được dịch chuyển đến vị trí ngẫu nhiên!");
 
             configFile.set("permission-mute", "bettersurvival.mute");
-            configFile.set("muteMessage", "§c»§7You was muted for {time} minutes!");
-            configFile.set("muteChatMessage", "§c»§7You was muted! You cant chat now!");
-            configFile.set("unmuteMessage", "§a»§7You was unmuted! Please respect rules to be not muted again :D");
+            configFile.set("muteMessage", "§c»§7Bạn đã bị khoá mõm trong {time} phút!");
+            configFile.set("muteChatMessage", "§c»§7Bạn đã bị khoá mỗm. Bạn được chat!");
+            configFile.set("unmuteMessage", "§a»§7Bạn đã được mở khoá mõm! Vùi lòng không vi phạm lần tiếp theo :D");
 
             configFile.set("showCoordinates", true);
-            configFile.set("doImmediateRespawn", true);
+            configFile.set("doImmediateRespawn", false);
             configFile.save();
         }
     }
@@ -181,13 +180,9 @@ public class MoreVanilla extends Addon{
             return;
         }
 
-        String format = configFile.getString("chatFormat");
-        format = format.replace("{player}", player.getName());
-        format = format.replace("{message}", event.getMessage());
-        event.setFormat(format);
 
         for (Player pplayer : this.plugin.getServer().getOnlinePlayers().values()){
-            if (!event.getMessage().contains("@"+pplayer.getName())) continue;
+            if (!event.getMessage().contains(pplayer.getName())) continue;
 
             PlaySoundPacket packet = new PlaySoundPacket();
             packet.name = "note.hat"; //cubemc use as info sound
@@ -341,7 +336,7 @@ public class MoreVanilla extends Addon{
         Player pplayer = Server.getInstance().getPlayer(player);
 
         if (pplayer == null || !pplayer.isConnected()){
-            executor.sendMessage("§6»§7Player §6@"+player+"§7 is not online!");
+            executor.sendMessage("§6»§7Player §6"+player+"§7 is not online!");
             return;
         }
         this.tpa.put(pplayer.getName(), executor.getName());
@@ -399,17 +394,17 @@ public class MoreVanilla extends Addon{
         if (!checkForPlayer(player, pexecutor)) return;
 
         if (executor.equals(player.getName()) && !player.hasPermission(configFile.getString("permission-fly"))){
-            player.sendMessage("§cYou dont have permission to fly!");
+            player.sendMessage("§cBạn không có quyền để bay!");
             return;
         }
 
         if (!executor.equals("console") && !executor.equals(player.getName()) && pexecutor != null && !pexecutor.hasPermission(configFile.getString("permission-manage"))) {
-            pexecutor.sendMessage("§cYou dont have permission to give fly!");
+            pexecutor.sendMessage("§cBạn không có quyền để cho người khác bay!");
             return;
         }
 
         if (pexecutor != null && !executor.equals(player.getName())){
-            pexecutor.sendMessage("§6»§7You changed flying mode of §6@"+player.getName()+"§7!");
+            pexecutor.sendMessage("§6»§7Bạn thay đổi chế độ fly của §6"+player.getName()+"§7!");
         }
 
         boolean canFly = player.getAdventureSettings().get(AdventureSettings.Type.ALLOW_FLIGHT);
@@ -428,17 +423,17 @@ public class MoreVanilla extends Addon{
         if (!checkForPlayer(player, pexecutor)) return;
 
         if (executor.equals(player.getName()) && !player.hasPermission(configFile.getString("permission-feed"))){
-            player.sendMessage("§cYou dont have permission to feed!");
+            player.sendMessage("§cBạn không có quyền để feed!");
             return;
         }
 
         if (!executor.equals("console") && !executor.equals(player.getName()) && pexecutor != null && !pexecutor.hasPermission(configFile.getString("permission-manage"))){
-            pexecutor.sendMessage("§cYou dont have permission to give feed to player!");
+            pexecutor.sendMessage("§cBạn không có quyền để feed cho người chơi khác!");
             return;
         }
 
         if (pexecutor != null && !executor.equals(player.getName())){
-            pexecutor.sendMessage("§6»§7You feeded §6@"+player.getName()+"§7!");
+            pexecutor.sendMessage("§6»§7Bạn đã feed cho §6"+player.getName()+"§7!");
         }
 
         player.getFoodData().reset();
@@ -454,17 +449,17 @@ public class MoreVanilla extends Addon{
         if (!checkForPlayer(player, pexecutor)) return;
 
         if (executor.equals(player.getName()) && !player.hasPermission(configFile.getString("permission-heal"))){
-            player.sendMessage("§cYou dont have permission to heal yourself!");
+            player.sendMessage("§cBạn không có quyền heal cho bản thân!");
             return;
         }
 
         if (!executor.equals("console") && !executor.equals(player.getName()) && pexecutor != null && !pexecutor.hasPermission(configFile.getString("permission-manage"))){
-            pexecutor.sendMessage("§cYou dont have permission to heal player!");
+            pexecutor.sendMessage("§cBạn không có quyền để heal cho người khác!");
             return;
         }
 
         if (pexecutor != null && !executor.equals(player.getName())){
-            pexecutor.sendMessage("§6»§7You healed §6@"+player.getName()+"§7!");
+            pexecutor.sendMessage("§6»§7Bạn đã heal cho §6"+player.getName()+"§7!");
         }
 
         player.addEffect(Effect.getEffect(Effect.REGENERATION).setAmplifier(1).setDuration(5 * 20));
@@ -506,7 +501,7 @@ public class MoreVanilla extends Addon{
 
     public void jump(Player player){
         if (!player.hasPermission(configFile.getString("permission-jump"))){
-            player.sendMessage("§cYou dont have permission to jump!");
+            player.sendMessage("§cBạn không có quyền để nhảy!");
             return;
         }
 
@@ -548,7 +543,7 @@ public class MoreVanilla extends Addon{
 
     public void randomTp(Player player){
         if (!player.hasPermission(configFile.getString("permission-randtp"))){
-            player.sendMessage("§cYou dont have permission to teleport randomly!");
+            player.sendMessage("§cBạn không có quyền để dịch chuyển ngẫu nhiên!");
             return;
         }
 
@@ -556,12 +551,12 @@ public class MoreVanilla extends Addon{
         int now = Server.getInstance().getTick();
 
         if (lastTp != null && (now - lastTp < (20 * 10))){
-            player.sendMessage("§c»§7Please wait! you have benn teleported just few seconds ago!");
+            player.sendMessage("§c»§7Vui lòng đợi, bạn đã dịch chuyển trong vài giây trước!");
             return;
         }
 
         this.randTpDelay.put(player.getName(), Server.getInstance().getTick());
-        player.sendMessage("§6»§7Finding nice location... This usually takes some time!");
+        player.sendMessage("§6»§7Đang tìm địa điểm đẹp. Vui lòng đợi trong giây lát!");
 
         String message = configFile.getString("randtpMessage");
         message = message.replace("{player}", player.getName());
@@ -573,12 +568,12 @@ public class MoreVanilla extends Addon{
         if (!checkForPlayer(player, pexecutor)) return;
 
         if (executor.equals(player.getName())){
-            player.sendMessage("§cYou cant mute yourself!");
+            player.sendMessage("§cBạn không thể khoá mõm bạn thân!");
             return;
         }
 
         if (!executor.equals("console") && pexecutor != null && !pexecutor.hasPermission(configFile.getString("permission-mute"))){
-            pexecutor.sendMessage("§cYou dont have permission to mute player!");
+            pexecutor.sendMessage("§cBạn không có quyền khoá mõm người khác!");
             return;
         }
 
@@ -599,7 +594,7 @@ public class MoreVanilla extends Addon{
         }
 
         if (pexecutor != null && !executor.equals(player.getName())){
-            pexecutor.sendMessage("§6»§7You muted §6@"+player.getName()+"§7 for §8"+time+"§7!");
+            pexecutor.sendMessage("§6»§7Bạn đã khoá mõm §6"+player.getName()+"§7 trong §8"+time+"§7!");
         }
 
         Calendar calendar = Calendar.getInstance();
@@ -620,12 +615,12 @@ public class MoreVanilla extends Addon{
 
 
         if (!executor.equals("console") && pexecutor != null && !pexecutor.hasPermission(configFile.getString("permission-mute"))){
-            pexecutor.sendMessage("§cYou dont have permission to unmute player!");
+            pexecutor.sendMessage("§cBạn không có quyền mở khoá mõm người khác!");
             return;
         }
 
         if (pexecutor != null && !executor.equals(player.getName())){
-            pexecutor.sendMessage("§6»§7You unmuted §6@"+player.getName()+"§7!");
+            pexecutor.sendMessage("§6»§7Bạn đã mở khoá mõm cho §6"+player.getName()+"§7!");
         }
 
         this.mutedPlayers.remove(playerName);
@@ -650,6 +645,8 @@ public class MoreVanilla extends Addon{
         message = message.replace("{state}", enable? "on" : "off");
         player.sendMessage(message);
     }
+
+
 
     public boolean keepInventory(Player player){
         return player != null && this.keepInvCache.getOrDefault(player.getName(), false);

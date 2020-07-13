@@ -10,10 +10,10 @@ public class JumpCommand extends Command {
     public MoreVanilla loader;
 
     public JumpCommand(String name, MoreVanilla loader) {
-        super(name, "Super power jump", "");
+        super(name, "Nhảy cao", "");
         this.commandParameters.clear();
 
-        this.usage = "§7/jump : Super power jump";
+        this.usage = "§7/jump : Nhảy cao";
         this.setUsage(getUsageMessage());
 
         this.setPermission(loader.configFile.getString("permission-jump"));
@@ -27,7 +27,7 @@ public class JumpCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
         this.loader.jump((Player) sender);

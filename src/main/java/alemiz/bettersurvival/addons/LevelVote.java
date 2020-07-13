@@ -31,23 +31,23 @@ public class LevelVote extends Addon {
             configFile.set("permission-vote", "bettersurvival.vote.normal");
             configFile.set("voteCooldown", 120);
 
-            configFile.set("newVote", "§a»§7Player §6@{player}§7 started new vote about §6{vote}§7!");
-            configFile.set("vote", "§a»§7Player §6@{player}§7 voted for §6{state}§7 in §6{vote}§7!");
-            configFile.set("voteMessage", "§6»§7Thanks for voting! You will see vote result of §6{vote}§7 soon...");
-            configFile.set("alreadyVoted", "§c»§7You have already voted for §6{vote}§7!");
-            configFile.set("voteTopicNotFound", "§c»§7Topic §6{vote}§7 does not exists!");
+            configFile.set("newVote", "§a»§7Người chơi §6{player}§7 mở vote về §6{vote}§7!");
+            configFile.set("vote", "§a»§7Người chơi §6{player}§7 đã vote cho §6{state}§7 về §6{vote}§7!");
+            configFile.set("voteMessage", "§6»§7Cảm ơn bạn vì đã vote! Bạn sẽ sớm nhận được kết quả về §6{vote}§7");
+            configFile.set("alreadyVoted", "§c»§7Bạn đã vote cho §6{vote}§7!");
+            configFile.set("voteTopicNotFound", "§c»§7Đề tài §6{vote}§7 không tồn tại!");
 
-            configFile.set("voteWinMessage", "§a»§7Voting about §6{vote}§7 has ended! Result is §6{result}.");
-            configFile.set("permissionMessage", "§c»§7You dont have permission to vote about §6{vote}§7!");
+            configFile.set("voteWinMessage", "§a»§7Vote về §6{vote}§7 đã kết thúc! Kết quả là §6{result}.");
+            configFile.set("permissionMessage", "§c»§7Bạn không có quyền vote §6{vote}§7!");
 
 
             configFile.set("topics.weather.command", "weather {state}");
             configFile.set("topics.weather.parameters", new ArrayList<>(Arrays.asList("rain", "thunder", "clear")));
-            configFile.set("topics.weather.usage", "Vote for ideal weather");
+            configFile.set("topics.weather.usage", "Vote về thời tiết");
 
             configFile.set("topics.time.command", "time set {state}");
             configFile.set("topics.time.parameters", new ArrayList<>(Arrays.asList("day", "night")));
-            configFile.set("topics.time.usage", "Vote for current time");
+            configFile.set("topics.time.usage", "Vote về thời gian");
 
 
             configFile.save();
@@ -90,7 +90,7 @@ public class LevelVote extends Addon {
             String value = form.getResponse().getInputResponse(1);
 
            if (topic.equals("") || value.equals("")){
-               player.sendMessage("§c»§7Please fill form completely!");
+               player.sendMessage("§c»§7Vùi vòng điền vào mẫu!");
                return;
            }
 

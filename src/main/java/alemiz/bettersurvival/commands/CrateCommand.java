@@ -33,7 +33,7 @@ public class CrateCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 
@@ -43,7 +43,7 @@ public class CrateCommand extends Command {
             if (!this.loader.enableVoteCrate) return true;
 
             if (!player.getInventory().getItemInHand().getCustomName().equals(this.loader.voteKey.getCustomName())){
-                player.sendMessage("§c»§7You must have crate key. Vote to get one!");
+                player.sendMessage("§c»§7Bản phải có key để mở. Vote để nhận key!");
                 return true;
             }
 
@@ -60,7 +60,7 @@ public class CrateCommand extends Command {
                 try {
                     this.loader.givekey((Player) sender, args[1], Integer.parseInt(args[2]));
                 }catch (Exception e){
-                    sender.sendMessage("§cPlease enter count as a number!");
+                    sender.sendMessage("§cVui lòng nhập giá trị là số!");
                 }
                 return true;
             case "set":

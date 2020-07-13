@@ -12,9 +12,9 @@ public class InvseeCommand extends Command {
     public Troller loader;
 
     public InvseeCommand(String name, Troller loader) {
-        super(name, "Show players inventory", "");
+        super(name, "Xem khô đồ của người chơi khác", "");
 
-        this.usage = "§7/invsee <player>: Show players inventory ";
+        this.usage = "§7/invsee <player>: Xem khô đồ của người chơi khác";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -35,7 +35,7 @@ public class InvseeCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 

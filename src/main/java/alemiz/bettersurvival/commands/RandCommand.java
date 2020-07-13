@@ -10,9 +10,9 @@ public class RandCommand extends Command {
     public MoreVanilla loader;
 
     public RandCommand(String name, MoreVanilla loader) {
-        super(name, "Teleports to random position", "", new String[]{"randtp", "randomtp"});
+        super(name, "Dịch chuyển tới vị trí ngẫu nhiên", "", new String[]{"randtp", "randomtp"});
 
-        this.usage = "§7/rand : Teleports to random position";
+        this.usage = "§7/rand : Dịch chuyển tới vị trí ngẫu nhiên";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -28,7 +28,7 @@ public class RandCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
         this.loader.randomTp((Player) sender);

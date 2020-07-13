@@ -10,9 +10,9 @@ public class ShopCommand extends Command {
     public SurvivalShop loader;
 
     public ShopCommand(String name, SurvivalShop loader) {
-        super(name, "Teleports to shop", "");
+        super(name, "Dịch chuyển đến shop", "");
 
-        this.usage = "§7/shop : Teleports to shop";
+        this.usage = "§7/shop : Dịch chuyển đến shop";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -26,7 +26,7 @@ public class ShopCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 
@@ -34,19 +34,19 @@ public class ShopCommand extends Command {
 
         if (args.length <= 0){
             this.loader.teleportToSpawn(player);
-            player.sendMessage("§6»§7You was teleported to shop!");
+            player.sendMessage("§6»§7Bạn đã được dịch chuyển đến shop!");
             return true;
         }
 
         if (!player.hasPermission(this.loader.configFile.getString("bettersurvival.shop.manage"))){
-            player.sendMessage("§c»§7You dont have permission to create shop!");
+            player.sendMessage("§c»§7Bạn không có quyền tạo shop!");
             return true;
         }
 
         switch (args[0]){
             case "set":
                 this.loader.setShopSpawn(player);
-                player.sendMessage("§6»§7Shop spawn was saved!");
+                player.sendMessage("§6»§7Đã lưu spawn của shop!");
                 break;
             case "smith":
                 if (this.loader.getSmithShop() == null){

@@ -63,14 +63,14 @@ public class BetterVoting extends Addon {
 
             //configFile.set("usePocketVote", true);
             configFile.set("customVoteCommand", true);
-            configFile.set("customVoteCommandLink", "https://cubedmc.eu/vote");
+            configFile.set("customVoteCommandLink", "https://tuilakhanh.me/vote");
 
             configFile.set("rewardPermissions", Arrays.asList("bettersurvival.feed", "bettersurvival.jump", "bettersurvival.near", "bettersurvival.vote.normal"));
             configFile.set("permissionsExpiry", 3); //days
 
             configFile.set("rewardItems", Arrays.asList("265:0:5", "322:0:1"));
-            configFile.set("voteMessage", "§b@{player} §3has voted for this awesome server!");
-            configFile.set("playerVoteMessage", "§6»@{player} thanks for voting! You received reward!");
+            configFile.set("voteMessage", "§b{player} §3đã vote cho server!");
+            configFile.set("playerVoteMessage", "§6»Cảm ơn {player} vì đã vote! Bạn đã nhận được quà!");
 
             configFile.set("voteCrate", true);
             configFile.set("voteCratePos", "0,0,0");
@@ -80,7 +80,7 @@ public class BetterVoting extends Addon {
             configFile.set("voteCrateText", "§7Open using vote key");
 
             configFile.set("permission-crateCommand", "bettersurvival.cratemanage");
-            configFile.set("crateKeyGiveMessageAuthor", "§6»§7Successfully sent key to §6@{target}!");
+            configFile.set("crateKeyGiveMessageAuthor", "§6»§7Successfully sent key to §6{target}!");
             configFile.set("crateKeyGiveMessage", "§6»§7You received crate key!");
             configFile.set("crateSetMessage", "§6»§7Please touch crate chest to get its coordinates.");
             configFile.save();
@@ -138,7 +138,7 @@ public class BetterVoting extends Addon {
             if (block == null) return;
             this.setters.remove(player.getName());
 
-            player.sendMessage("§6»§7You selected block at §6"+block.x +"§7, §6"+ block.y +"§7, §6"+ block.z+"§7.");
+            player.sendMessage("§6»§7Bạn đã chọn block tại §6"+block.x +"§7, §6"+ block.y +"§7, §6"+ block.z+"§7.");
             return;
         }
 
@@ -147,7 +147,7 @@ public class BetterVoting extends Addon {
             event.setCancelled();
 
             if (item.getId() != voteKey.getId() || !item.getCustomName().equals(voteKey.getCustomName())){
-                player.sendMessage("§c»§7You must have crate key. Vote to get one!");
+                player.sendMessage("§c»§7Bạn phải có key để mơ. Hãy vote để nhận key!");
                 return;
             }
             this.sendCrateMenu(player);
@@ -300,7 +300,7 @@ public class BetterVoting extends Addon {
 
         Player target = Server.getInstance().getPlayer(targetName);
         if (target == null){
-            executor.sendMessage("§6»Player §6@"+targetName+"§7 was not found!");
+            executor.sendMessage("§6»Player §6"+targetName+"§7 was not found!");
             return;
         }
 

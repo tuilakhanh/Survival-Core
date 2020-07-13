@@ -36,9 +36,9 @@ public class BetterEconomy extends Addon {
 
     static {
         Item item = Item.get(Item.PAPER, 0, 1);
-        item.setCustomName("§r§eBank Note");
+        item.setCustomName("§r§eTiền giấy");
         item.getNamedTag().putByte("economy_note", 1);
-        item.setLore("§r§5Use §d/bank apply§5 to apply note");
+        item.setLore("§r§5Sử dụng §d/bank apply§5 để nhận coins");
         bankNote = item;
     }
 
@@ -63,17 +63,17 @@ public class BetterEconomy extends Addon {
             configFile.set("enableWithdraw", true);
             configFile.set("maxWithdrawAmount", 50000);
 
-            configFile.set("noteCreateMessage", "§6»§7You have successfully created Bank Note with price §e{money}$§7!");
-            configFile.set("noteApplyMessage", "§6»§7Bank Note was applied to your global balance. Your new balance is §e{money}$§7!");
-            configFile.set("noteApplyMessageClan", "§6»§7Bank Note was applied to your clan balance. Your new balance is §e{money}$§7!");
-            configFile.set("failMessage", "§c»§7You do not have enough coins to create bank note§7!");
-            configFile.set("failMessageLimit", "§c»§7Maximum limit to bank note is §e{limit}$§7!");
+            configFile.set("noteCreateMessage", "§6»§7Bạn đã tạo tiền giấy với giá §e{money}$§7!");
+            configFile.set("noteApplyMessage", "§6»§7Tiền giấy đã được chuyển vào ngân hàng của bạn. Số dư hiện tại: §e{money}$§7!");
+            configFile.set("noteApplyMessageClan", "§6»§7Tiền giấy đã được chuyển vào ngân hàng của clan. Số dư hiện tại: §e{money}$§7!");
+            configFile.set("failMessage", "§c»§7Bạn không có đủ tiền để tạo tiền giấy§7!");
+            configFile.set("failMessageLimit", "§c»§7Giá trị cao nhất của tiền giấy là §e{limit}$§7!");
 
-            configFile.set("tradeCreatorAdd", "§6»§7Put your item into ItemFrame to create trade shop.");
-            configFile.set("requireTraderMode", "§c»§7Please enable trader mode first: §6/trade <on|off>§7 Once trade mode is enabled you will be able to buy any item by removing it from item frame!");
-            configFile.set("tradeShopCreate", "§a»§7Trade item frame with price value §6{price}§7 was created!");
-            configFile.set("tradeFailMessage", "§c»§7You do not have enough coins to buy this item!");
-            configFile.set("tradeBuyMessage", "§a»§7You have successfully bought §6{item}§7!");
+            configFile.set("tradeCreatorAdd", "§6»§7Đặt item vào ItemFrame để tạo trade shop.");
+            configFile.set("requireTraderMode", "§c»§7Vui lòng bật chế độ trade trước: §6/trade <on|off>§7 Khi ở chế độ trade, bạn có thể mua item bằng cách lấy item ra khỏi ItemFrame!");
+            configFile.set("tradeShopCreate", "§a»§7Khung trade item với giá §6{price}§7 đã được tạo!");
+            configFile.set("tradeFailMessage", "§c»§7Bạn không có đủ tiền để mua item!");
+            configFile.set("tradeBuyMessage", "§a»§7Bạn đã mua thành công §6{item}§7!");
             configFile.save();
         }
     }
@@ -102,7 +102,7 @@ public class BetterEconomy extends Addon {
         Integer price = this.removeTraderCreator(player);
 
         if (price == null || price < 1){
-            player.sendMessage("§c»§7Please set right trade price.");
+            player.sendMessage("§c»§7Vui lòng nhập giá trade trước.");
             return;
         }
 
@@ -219,7 +219,7 @@ public class BetterEconomy extends Addon {
         if (clanMode && Addon.getAddon("playerclans") != null){
             Clan clan = ((PlayerClans) Addon.getAddon("playerclans")).getClan(player);
             if (clan == null) {
-                player.sendMessage("§c»§7You are not in any clan!");
+                player.sendMessage("§c»§7Bạn không ở trong clan!");
                 return;
             }
 
@@ -253,7 +253,7 @@ public class BetterEconomy extends Addon {
         if (player == null || item == null) return;
 
         if (!item.hasCompoundTag() || item.getNamedTag().getByte("economy_note") != 1 || !item.getNamedTag().contains("economy_value")){
-            player.sendMessage("§c»§7This is not right, applicable Bank Note! Please hold your Bank Note in hand!");
+            player.sendMessage("§c»§7Vui lòng cầm tiền giấy trên tay!");
             return;
         }
 
@@ -263,7 +263,7 @@ public class BetterEconomy extends Addon {
         if (clanMode && Addon.getAddon("playerclans") != null){
             clan = ((PlayerClans) Addon.getAddon("playerclans")).getClan(player);
             if (clan == null) {
-                player.sendMessage("§c»§7You are not in any clan!");
+                player.sendMessage("§c»§7Bạn không ở trong clan!");
                 return;
             }
 
@@ -285,7 +285,7 @@ public class BetterEconomy extends Addon {
     public Item buildNote(String owner, int price){
         Item item = getBankNote();
         item.setCustomName(item.getCustomName()+" §6"+TextUtils.formatBigNumber(price)+"$");
-        item.setLore(ArrayUtils.addAll(new String[]{"§r§5Value: "+price+"$", "§r§5Created For: §d"+owner}, item.getLore()));
+        item.setLore(ArrayUtils.addAll(new String[]{"§r§5Giá: "+price+"$", "§r§5Tạo bởi: §d"+owner}, item.getLore()));
 
         CompoundTag tag = item.getNamedTag();
         tag.putInt("economy_value", price);
@@ -320,14 +320,14 @@ public class BetterEconomy extends Addon {
         int price = tag.getInt("trade_price");
         int count = tag.getInt("trade_count");
 
-        player.sendTip("§aOwner: §2"+owner+"\n§bCount: §3"+count+"§b Price: §e"+price+"$");
+        player.sendTip("§aChủ sở hữu: §2"+owner+"\n§bSố lượng: §3"+count+"§b Giá: §e"+price+"$");
     }
 
     public void addTraderCreator(Player player, int value){
         if (player == null) return;
 
         if (value < 1){
-            player.sendMessage("§c»§7Please set right trade price.");
+            player.sendMessage("§c»§7Vui lòng nhập giá trước.");
             return;
         }
         this.tradeCreators.put(player.getName(), value);

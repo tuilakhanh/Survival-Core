@@ -14,7 +14,7 @@ public class LevelVoteCommand extends Command {
     public LevelVote loader;
 
     public LevelVoteCommand(String name, LevelVote loader, String usage) {
-        super(name, "Vote for level events", "");
+        super(name, "Vote về thời tiết và thời gian", "");
 
         this.usage = usage;
         this.setUsage(getUsageMessage());
@@ -32,15 +32,15 @@ public class LevelVoteCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be used only in game!");
+            sender.sendMessage("§cBạn chỉ được sử dụng lệnh này trong game!");
             return true;
         }
         Player player = (Player) sender;
 
         if (args.length < 2){
-            FormWindowCustom form = new FormWindowCustom("Level Vote");
-            form.addElement(new ElementDropdown("§7Choose vote Topic", this.loader.voteTopics, 0));
-            form.addElement(new ElementInput("§7Choose vote value"));
+            FormWindowCustom form = new FormWindowCustom("Vote");
+            form.addElement(new ElementDropdown("§7Chọn chủ đề", this.loader.voteTopics, 0));
+            form.addElement(new ElementInput("§7Chọn giá trị"));
             player.showFormWindow(form);
             return true;
         }

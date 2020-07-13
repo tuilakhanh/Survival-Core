@@ -12,10 +12,10 @@ public class HomeCommand extends Command {
     public Home loader;
 
     public HomeCommand(String name, Home loader) {
-        super(name, "Teleport to your home", "");
+        super(name, "Dịch chuyển đến home", "");
         this.commandParameters.clear();
 
-        this.usage = "§7/home <home - optional> : Teleport to your home";
+        this.usage = "§7/home <home - optional> : Dịch chuyển đến home";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.put("default", new CommandParameter[]{
@@ -32,7 +32,7 @@ public class HomeCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 

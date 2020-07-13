@@ -65,30 +65,30 @@ public class MyLandProtect extends Addon {
             configFile.set("landsAccessPermission", "bettersurvival.land.access");
             configFile.set("chestsAccessPermission", "bettersurvival.chest.access");
 
-            configFile.set("landNotExists", "§6»§7Land §6{land}§7 not found!");
-            configFile.set("landWithNameExists", "§6»§7Land §6{land}§7 already exists§7!");
-            configFile.set("landWarn", "§6»§7Hey §6@{player}§7, this is not your region! Ask §6@{owner} §7to access §6{land}§7!");
-            configFile.set("landTooBig", "§6»§7Selected land is bigger than maximum allowed limit §6{limit} blocks§7!");
-            configFile.set("landPosSelected", "§6»§7Successfully selected {select} position at §6{pos}§7!");
-            configFile.set("landLimitWarn", "§6»§7Lands limit reached!");
-            configFile.set("landHereNotFound", "§6»§7This land is free§7!");
+            configFile.set("landNotExists", "§6»§7Vùng đất §6{land}§7 khổng thể tìm thấy!");
+            configFile.set("landWithNameExists", "§6»§7Vùng đất §6{land}§7 không tồn tại§7!");
+            configFile.set("landWarn", "§6»§7Hey §6{player}§7, đây không phải khu vực của bạn! Hỏi §6{owner} §7để có quyền ở §6{land}§7!");
+            configFile.set("landTooBig", "§6»§7Vùng đất bạn đã chọn lớn hơn giới hạn cho phép là §6{limit} blocks§7!");
+            configFile.set("landPosSelected", "§6»§7Hoàn thành chọn vị trí {select} tại §6{pos}§7!");
+            configFile.set("landLimitWarn", "§6»§7Đã đạt giới hạn vùng đất cho phép!");
+            configFile.set("landHereNotFound", "§6»§7Vùng đất này được miễn phí§7!");
 
-            configFile.set("landCreate", "§6»§7You have created new land §6{land}§7! You have §6{limit}§7 free lands!");
-            configFile.set("landRemove", "§6»§7You have removed your land §6{land}§7!");
+            configFile.set("landCreate", "§6»§7Bạn đã tạo vùng đất mới tên §6{land}§7! Và bạn có §6{limit}§7 vùng đất miễn phí!");
+            configFile.set("landRemove", "§6»§7Bạn đã xoá vùng đất của bạn §6{land}§7!");
             configFile.set("landSetPos", "§6»§7Touch 2 blocks with wand to select border positions§7!");
-            configFile.set("landWhitelist", "§6»§7Whitelist for §6{land}§7 saved§7!");
-            configFile.set("landWhitelistList", "§6»{land}§7 access: {players}");
-            configFile.set("landHere", "§6»§7The land §6{land}§7 is owned by §6{owner}§7!");
-            configFile.set("landList", "§6»§7Your lands: {lands}");
+            configFile.set("landWhitelist", "§6»§7Danh sách trắng cho §6{land}§7 đã được lưu§7!");
+            configFile.set("landWhitelistList", "§6»{land}§7 truy cập: {players}");
+            configFile.set("landHere", "§6»§7Vùng đất §6{land}§7 thuộc sở hữu của §6{owner}§7!");
+            configFile.set("landList", "§6»§7Vùng đất của bạn: {lands}");
 
-            configFile.set("landWhitelistAdd", "§6»§7You gain access §6@{player}§7 to your land §6{land}§7!");
-            configFile.set("landWhitelistRemove", "§6»§7You restrict §6@{player}§7's access to your land §6{land}§7!");
+            configFile.set("landWhitelistAdd", "§6»§7Bạn đã cho §6{player}§7 vào vùng đất §6{land}§7!");
+            configFile.set("landWhitelistRemove", "§6»§7Đã xoá §6{player}§7 khỏi vùng đất của bạn §6{land}§7!");
 
-            configFile.set("landClanExists", "§6»§7Your §6@{clan}§7 clan has already land!");
+            configFile.set("landClanExists", "§6»§7Clan §6{clan}§7 đã có vùng đất riêng!");
 
-            configFile.set("privateChestCreate", "§6»§r§7You have successfully created private chest!");
-            configFile.set("privateChestAccessDenied", "§c»§r§7This chest is owned by §6@{owner}§7! You can not access it.");
-            configFile.set("privateChestDestroy", "§c»§r§7You have successfully destroyed private chest!");
+            configFile.set("privateChestCreate", "§6»§r§7Bạn đã tạo rương riêng của mình!");
+            configFile.set("privateChestAccessDenied", "§c»§r§7Rường thuộc quyền sở hữu bởi §6{owner}§7! Bạn không có quyền sử dụng nó.");
+            configFile.set("privateChestDestroy", "§c»§r§7Bạn đã phá huỷ rương riêng!");
             configFile.save();
         }
     }
@@ -122,7 +122,7 @@ public class MyLandProtect extends Addon {
             String message = configFile.getString("landPosSelected");
             message = message.replace("{pos}", event.getBlock().x +", "+ event.getBlock().y +", "+ event.getBlock().z);
             message = message.replace("{player}", player.getName());
-            message = message.replace("{select}", (blocks.size() == 1)? "first" : "second");
+            message = message.replace("{select}", (blocks.size() == 1)? "thứ nhất" : "thứ hai");
             player.sendMessage(message);
             event.setCancelled();
             return;
@@ -317,7 +317,7 @@ public class MyLandProtect extends Addon {
         //1. Check if lanf is in spawn
         for (Block block : blocks){
             if (!block.getLevel().isInSpawnRadius(block)) continue;
-            player.sendMessage("§c»§7You can not create land inside spawn area!");
+            player.sendMessage("§c»§7Bạn không thể tạo vùng đất ở khu spawn!");
             return false;
         }
 
@@ -429,7 +429,7 @@ public class MyLandProtect extends Addon {
             if (clanMode){
                 clan = ((PlayerClans) Addon.getAddon("playerclans")).getClan(player);
                 if (clan == null) {
-                    player.sendMessage("§c»§7You are not in any clan!");
+                    player.sendMessage("§c»§7Bạn không có ở clan nào!");
                     return;
                 }
 
@@ -469,7 +469,7 @@ public class MyLandProtect extends Addon {
                 return;
             }
 
-            player.sendMessage("§6»§r§7Validating land. Please wait...");
+            player.sendMessage("§6»§r§7Đang xác thực vùng đất. Vui lòng đợi ...");
 
             List<Block> blocks = this.selectors.get(player.getName().toLowerCase());
             if (!validateLand(blocks, player, clanMode)){
@@ -490,7 +490,7 @@ public class MyLandProtect extends Addon {
             String message = configFile.getString("landCreate");
             message = message.replace("{land}", (clanMode? clan.getName()+" land" : land));
             message = message.replace("{player}", player.getName());
-            message = message.replace("{limit}", player.isOp()? "unlimited" : String.valueOf(freeLands));
+            message = message.replace("{limit}", player.isOp()? "không giới hạn" : String.valueOf(freeLands));
             player.sendMessage(message);
 
             this.selectors.remove(player.getName().toLowerCase());
@@ -534,7 +534,7 @@ public class MyLandProtect extends Addon {
 
         Clan clan = ((PlayerClans) Addon.getAddon("playerclans")).getClan(player);
         if (clan == null) {
-            player.sendMessage("§c»§7You are not in any clan!");
+            player.sendMessage("§c»§7Bạn không có ơ clan!");
             return;
         }
 
@@ -562,7 +562,7 @@ public class MyLandProtect extends Addon {
         }
 
         if (land instanceof ClanLand){
-            player.sendMessage("§6»§7This land is owned by §6"+land.owner+" Clan§7!");
+            player.sendMessage("§6»§7Vùng đất thuộc quyền sở hưu của Clan §6"+land.owner+"!");
             return;
         }
 
@@ -622,7 +622,7 @@ public class MyLandProtect extends Addon {
 
         String owner = this.getPrivateChestOwner(chest);
         if (owner != null){
-            player.sendMessage("§c»§r§7This chest is already owned by §6@"+owner+"§7!");
+            player.sendMessage("§c»§r§7Rưởng này đã thược quyền sở hữu của §6"+owner+"§7!");
             return false;
         }
 

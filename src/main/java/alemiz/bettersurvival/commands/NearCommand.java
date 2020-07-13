@@ -12,10 +12,10 @@ public class NearCommand extends Command {
     public MoreVanilla loader;
 
     public NearCommand(String name, MoreVanilla loader) {
-        super(name, "List players who are nearby", "");
+        super(name, "Danh sách nhưng người chơi đang ở gần bạn", "");
         this.commandParameters.clear();
 
-        this.usage = "§7/near <radius - optional>: List players who are nearby";
+        this.usage = "§7/near <bán kính>: Danh sách người chơi ở gần bạn";
         this.setUsage(getUsageMessage());
 
         this.setPermission(loader.configFile.getString("permission-near"));
@@ -29,7 +29,7 @@ public class NearCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
         Player player = (Player) sender;
@@ -39,7 +39,7 @@ public class NearCommand extends Command {
             try {
                 radius = Integer.parseInt(args[0]);
             }catch (Exception e){
-                player.sendMessage("§cPlease enter numerical radius!");
+                player.sendMessage("§cVui lòng nhập bán kính là số!");
                 return true;
             }
         }

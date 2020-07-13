@@ -17,9 +17,9 @@ public class VoteCommand extends Command implements PluginIdentifiableCommand {
     private PocketVote plugin;
 
     public VoteCommand(String name, BetterVoting loader) {
-        super(name, "Vote command", "/vote [top]", new String[]{"v"});
+        super(name, "Lệnh voe", "/vote [top]", new String[]{"v"});
 
-        this.usage = "§7/vote : Vote command";
+        this.usage = "§7/vote : Lệnh vote";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -50,7 +50,7 @@ public class VoteCommand extends Command implements PluginIdentifiableCommand {
                     sender.sendMessage(TextFormat.YELLOW + "Use /guru to manage this link.");
                 }
 
-                sender.sendMessage(TextFormat.AQUA + "You can vote at " + TextFormat.YELLOW + link);
+                sender.sendMessage(TextFormat.AQUA + "Bạn có thể vote tại " + TextFormat.YELLOW + link);
                 return true;
             }
         }

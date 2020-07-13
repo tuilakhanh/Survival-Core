@@ -12,9 +12,9 @@ public class SetHomeCommand extends Command {
     public Home loader;
 
     public SetHomeCommand(String name, Home loader) {
-        super(name, "Save your home location", "");
+        super(name, "Lưu vị trí home", "");
 
-        this.usage = "§7/sethome <home - optional> : Save your home location";
+        this.usage = "§7/sethome <home - optional> : Lưu vị trí home";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -32,7 +32,7 @@ public class SetHomeCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 

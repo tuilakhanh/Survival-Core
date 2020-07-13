@@ -12,10 +12,10 @@ public class TradeCommand extends Command {
     public BetterEconomy loader;
 
     public TradeCommand(String name, BetterEconomy loader) {
-        super(name, "Trade with players", "");
+        super(name, "Trade với người chơi khác", "");
 
-        this.usage = "§7/trade setup <price> : Setup trade ItemFrame\n" +
-                "§7/trade <on|off> : Enable trade mode";
+        this.usage = "§7/trade setup <price> : Thiết lập trade với ItemFrame\n" +
+                "§7/trade <on|off> : Bật chế độ trade";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -33,7 +33,7 @@ public class TradeCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 
@@ -54,17 +54,17 @@ public class TradeCommand extends Command {
                     int value = Integer.parseInt(args[1]);
                     this.loader.addTraderCreator(player, value);
                 }catch (NumberFormatException e){
-                    player.sendMessage("§c»§r§7Please provide numerical value!");
+                    player.sendMessage("§c»§r§7Vui lòng nhập giá trị là số!");
                     break;
                 }
                 break;
             case "on":
                 this.loader.addTrader(player);
-                player.sendMessage("§6»§7Trade mode has been enabled!");
+                player.sendMessage("§6»§7Chế độ trade đã được bật!");
                 break;
             case "off":
                 this.loader.removeTrader(player);
-                player.sendMessage("§6»§7Trade mode has been disabled!");
+                player.sendMessage("§6»§7Đã tắt chế độ trade!");
                 break;
             default:
                 player.sendMessage(this.getUsageMessage());

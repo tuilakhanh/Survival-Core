@@ -12,9 +12,9 @@ public class FeedCommand extends Command {
     public MoreVanilla loader;
 
     public FeedCommand(String name, MoreVanilla loader) {
-        super(name, "Load full food bar", "");
+        super(name, "Làm đầy thanh thức ăn", "");
 
-        this.usage = "§7/feed <player - optional> : Load full food bar";
+        this.usage = "§7/feed <player - optional> : Làm đầy thanh thức ăn";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -34,7 +34,7 @@ public class FeedCommand extends Command {
         }
 
         if (!(sender instanceof Player) && args.length < 1){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 

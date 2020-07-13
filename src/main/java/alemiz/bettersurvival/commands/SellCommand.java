@@ -10,9 +10,9 @@ public class SellCommand extends Command {
     public SurvivalShop loader;
 
     public SellCommand(String name, SurvivalShop loader) {
-        super(name, "Opens sell menu", "");
+        super(name, "Mở ui sell", "");
 
-        this.usage = "§7/sell : Open sell menu";
+        this.usage = "§7/sell : Mở ui sell";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -26,7 +26,7 @@ public class SellCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 

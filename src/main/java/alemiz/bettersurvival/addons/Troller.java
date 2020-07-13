@@ -41,15 +41,15 @@ public class Troller extends Addon {
         if (!configFile.exists("enable")) {
             configFile.set("enable", true);
 
-            configFile.set("playerNotFound", "§6»§7Player was not found!");
-            configFile.set("blockNotFound", "§6»§7Block with id {id} was not found!");
+            configFile.set("playerNotFound", "§6»§7Không tiềm thấy người chơi!");
+            configFile.set("blockNotFound", "§6»§7ID {id} không đúng!");
 
             configFile.set("permission-vanish", "bettersurvival.troller.vanish");
-            configFile.set("vanishMessage", "§6»§7Woosh! Your vanish mode was turned §6{state}!");
+            configFile.set("vanishMessage", "§6»§7Woosh! Chế độ tàn hình đã được bật §6{state}!");
 
             configFile.set("permission-block", "bettersurvival.troller.block");
-            configFile.set("blockMessage", "§6»§7Some blocks spawned around §6@{victim}§7!");
-            configFile.set("unblockMessage", "§6»@{victim}§7 was freed!");
+            configFile.set("blockMessage", "§6»§7Block đã được spawn quanh §6{victim}§7!");
+            configFile.set("unblockMessage", "§6»{victim}§7 đã được thả!");
 
             configFile.set("permission-troll", "bettersurvival.troller.basic");
             configFile.set("permission-troll-advanced", "bettersurvival.troller.advanced");
@@ -57,10 +57,10 @@ public class Troller extends Addon {
             configFile.set("permission-invsee", "bettersurvival.troller.invsee");
 
             /*Basic Troll commands*/
-            configFile.set("anvilMessage", "§6»§7The anvil has been dropped on §6@{victim}§7!");
-            configFile.set("chatMessage", "§6»§7It looks like §6@{victim}§7 is unsure what to say§7!");
-            configFile.set("rainbowFloorMessage", "§6»§7Player §6@{victim}§7 got spammed with wool mess§7!");
-            configFile.set("fakeLavaMessage", "§6»§7Player §6@{victim}§7 want to swim in lava§7!");
+            configFile.set("anvilMessage", "§6»§7Anvil đã rơi vào người §6{victim}§7!");
+            configFile.set("chatMessage", "§6»§7It looks like §6{victim}§7 is unsure what to say§7!");
+            configFile.set("rainbowFloorMessage", "§6»§7Người chơi §6{victim}§7 bị spam với một đống len§7!");
+            configFile.set("fakeLavaMessage", "§6»§7Người chơi §6{victim}§7 muốn bơi trong lava§7!");
             configFile.save();
         }
     }

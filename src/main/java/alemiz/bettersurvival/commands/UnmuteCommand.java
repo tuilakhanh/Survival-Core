@@ -12,9 +12,9 @@ public class UnmuteCommand extends Command {
     public MoreVanilla loader;
 
     public UnmuteCommand(String name, MoreVanilla loader) {
-        super(name, "Unmute player", "");
+        super(name, "Mở khoá mõm người chơi", "");
 
-        this.usage = "§7/unmute <player>: Unmute player";
+        this.usage = "§7/unmute <player>: Mở khoá mõm người chơi";
         this.setUsage(getUsageMessage());
 
         this.ignoreInHelpTexts = true;

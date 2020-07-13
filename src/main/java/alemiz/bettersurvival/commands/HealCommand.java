@@ -13,9 +13,9 @@ public class HealCommand extends Command {
     public MoreVanilla loader;
 
     public HealCommand(String name, MoreVanilla loader) {
-        super(name, "Heal player or yourself", "");
+        super(name, "Hồi máu", "");
 
-        this.usage ="§7/heal <player - optional> : Heal player or yourself";
+        this.usage ="§7/heal <player(tuỳ ý)> : Hồi máu cho người chơi khác hoặc bản thân";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -34,7 +34,7 @@ public class HealCommand extends Command {
         }
 
         if (!(sender instanceof Player) && args.length < 1){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được thử hiện trong game!");
             return true;
         }
 

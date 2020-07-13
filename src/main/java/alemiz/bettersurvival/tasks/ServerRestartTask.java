@@ -15,7 +15,7 @@ public class ServerRestartTask implements Runnable{
         int restartIn = this.plugin.getRestartTime();
 
         if (restartIn > 0){
-            if (restartIn <= 20) this.plugin.getServer().broadcastMessage("§c»§7Server restarts in "+restartIn+" minutes!");
+            if (restartIn <= 20) this.plugin.getServer().broadcastMessage("§c»§7Server sẽ khởi động lại trong "+restartIn+" phút!");
             this.plugin.setRestartTime(restartIn-10);
             return;
         }

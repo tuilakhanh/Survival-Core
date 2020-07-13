@@ -53,7 +53,7 @@ public class RandomTpTask extends Task {
         }
 
         if (this.countdown > 0){
-            player.sendMessage("§6»§7Teleporting in §6"+this.countdown+"§7!");
+            player.sendMessage("§6»§7Dịch chuyển trong §6"+this.countdown+"§7!");
 
             this.countdown--;
             BetterSurvival.getInstance().getServer().getScheduler().scheduleDelayedTask(this, 20);

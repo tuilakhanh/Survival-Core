@@ -10,9 +10,9 @@ public class BackCommand extends Command {
     public MoreVanilla loader;
 
     public BackCommand(String name, MoreVanilla loader) {
-        super(name, "Teleports to your death point", "");
+        super(name, "Dịch chuyển bạn đến điểm đã chết", "");
 
-        this.usage = "§7/back : Teleports to your death point";
+        this.usage = "§7/back : Dịch chuyển bạn đến điểm đã chết";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -28,7 +28,7 @@ public class BackCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
         this.loader.back((Player) sender);

@@ -13,14 +13,14 @@ public class LandCommand extends Command {
     public MyLandProtect loader;
 
     public LandCommand(String name, MyLandProtect loader) {
-        super(name, "Protect your area", "");
+        super(name, "Bạo vệ khu vực của bạn", "");
 
-        this.usage = "§7/land <wand> : Get wand to select positions\n" +
-                "§7/land <create|add> <land>: Create land after selected positions\n" +
-                "§7/land <remove|del> <land>: Deny players request\n"+
-                "§7/land <whitelist> <add|remove|list> <land> <player> : Manage lands whitelist\n"+
-                "§7/land <here> : Shows area where you are\n" +
-                "§7/land <list> : Shows your lands";
+        this.usage = "§7/land <wand> : Nhận gây để chọn vị trí\n" +
+                "§7/land <create|add> <land>: Tạo vùng đất từ vị trí đã chọn\n" +
+                "§7/land <remove|del> <land>: Xoá vùng đất của bạn\n"+
+                "§7/land <whitelist> <add|remove|list> <land> <player> : Quản lý danh sách trắng\n"+
+                "§7/land <here> : Hiện khu đất hiện tại\n" +
+                "§7/land <list> : Hiện tất cả vùng đất của bạn";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -34,7 +34,7 @@ public class LandCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 

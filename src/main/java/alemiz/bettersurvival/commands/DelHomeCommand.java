@@ -11,9 +11,9 @@ public class DelHomeCommand extends Command {
     public Home loader;
 
     public DelHomeCommand(String name, Home loader) {
-        super(name, "Remove your home", "");
+        super(name, "Xoá home của bạn", "");
 
-        this.usage = "§7/delhome <home - optional> : Remove your home";
+        this.usage = "§7/delhome <home(tuỳ ý)> : Xoá home của bạn";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -31,7 +31,7 @@ public class DelHomeCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 

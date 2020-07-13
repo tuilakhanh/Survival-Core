@@ -50,6 +50,7 @@ public class BetterSurvival extends PluginBase implements Listener {
         this.loadAddons();
         this.getServer().getPluginManager().registerEvents(this, this);
         this.getLogger().info("§aEnabled BetterSurvival by §6Alemiz!");
+        this.getLogger().info("Được chỉnh sửa bởi tuilakhanh");
     }
 
     @Override
@@ -60,6 +61,7 @@ public class BetterSurvival extends PluginBase implements Listener {
     @Override
     public void onDisable() {
         getLogger().info("§aDisabling BetterSurvival by §6Alemiz!");
+        getLogger().info("Được chỉnh sửa bởi tuilakhanh");
     }
 
     @EventHandler

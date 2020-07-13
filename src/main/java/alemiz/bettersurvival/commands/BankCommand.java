@@ -13,10 +13,10 @@ public class BankCommand extends Command {
     public BetterEconomy loader;
 
     public BankCommand(String name, BetterEconomy loader) {
-        super(name, "Manage your bank account", "");
+        super(name, "Quản lý ngân hàng", "");
 
-        this.usage = "§7/bank note <price> : Creates bank note with own money value\n" +
-                "§7/bank apply : Applies note from your hand to bank balance";
+        this.usage = "§7/bank note <price> : Tạo tiền giấy từ coins của bạn\n" +
+                "§7/bank apply : Chuyển tiền giấy thành coins";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -33,7 +33,7 @@ public class BankCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 
@@ -55,14 +55,14 @@ public class BankCommand extends Command {
                     int value = Integer.parseInt(args[1]);
                     this.loader.createNote(player, value);
                 }catch (NumberFormatException e){
-                    player.sendMessage("§c»§r§7Please provide numerical value!");
+                    player.sendMessage("§c»§r§7Vui lòng nhập gia trị là số!");
                     break;
                 }
                 break;
             case "apply":
                 Item item = player.getInventory().getItemInHand();
                 if (item.getId() == Item.AIR){
-                    player.sendMessage("§c»§r§7You must hold Bank Note item!");
+                    player.sendMessage("§c»§r§7Bạn phải giữ thẻ ngân hàng của bạn trên tay");
                     break;
                 }
 

@@ -64,16 +64,16 @@ public class BetterLobby extends Addon {
     public void loadConfig() {
         if (!configFile.exists("enable")){
             configFile.set("enable", true);
-            configFile.set("motd", "§bCube§6Mc §3Survival");
+            configFile.set("motd", "TuiLaKhanh Survival");
 
             configFile.set("broadcast", Arrays.asList("§eDid you find hacker? Use §b/report§e to report him!", "§eDo people actually read these?", "§aCheck out our youtube channel §cCubeMC Official§a!", "§bVote for us and get §eSubscriber §brank!", "§2Tips for commands can be found on §a/spawn§2!"));
             configFile.set("broadcastInterval", 1800);
-            configFile.set("joinMessage", "§6»§7Be careful, §6@{player}§7 joined!");
-            configFile.set("quitMessage", "§6»§7Oops §6@{player}§7 left!");
+            configFile.set("joinMessage", "§8[§6+§8] {player}");
+            configFile.set("quitMessage", "§8[§4-§8] {player}");
 
-            configFile.set("bossBar", true);
-            configFile.set("bossBarText", "§bCube§eMC §cSurvival");
-            configFile.set("bossBarSize", 50);
+            configFile.set("bossBar", false);
+            configFile.set("bossBarText", "TuiLaKhanh §cSurvival");
+            configFile.set("bossBarSize", 100);
 
             configFile.set("helpParticlePos", new ArrayList<>());
             configFile.set("helpParticleMaxLines", 10);

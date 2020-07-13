@@ -13,10 +13,10 @@ public class GetHomeCommand extends Command {
     public Home loader;
 
     public GetHomeCommand(String name, Home loader) {
-        super(name, "Prints your homes", "", new String[]{"listhome"});
+        super(name, "Hiện home của bạn", "", new String[]{"listhome"});
         this.commandParameters.clear();
 
-        this.usage = "§7/gethome: Prints your homes";
+        this.usage = "§7/gethome: Hiện home của bạn";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.put("default", new CommandParameter[]{
@@ -34,7 +34,7 @@ public class GetHomeCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 
@@ -42,7 +42,7 @@ public class GetHomeCommand extends Command {
 
         Set<String> homes = loader.getHomes(player);
         if (homes.isEmpty()){
-            player.sendMessage("§6»§7You dont have any homes yet!");
+            player.sendMessage("§6»§7Bạn chưa có home!");
             return true;
         }
 
@@ -51,7 +51,7 @@ public class GetHomeCommand extends Command {
             format.append(home).append(", ");
         }
 
-        player.sendMessage("§6»§7Your homes: "+format.substring(0, format.length()-2));
+        player.sendMessage("§6»§7Homes của bạn: "+format.substring(0, format.length()-2));
         return true;
     }
 }

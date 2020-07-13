@@ -21,28 +21,28 @@ public class ClanCommand extends Command {
     public PlayerClans loader;
 
     public ClanCommand(String name, PlayerClans loader) {
-        super(name, "All clan commands in one place", "");
+        super(name, "Tất cả các lệnh của clan", "");
 
-        this.usage = "§7/clan create <name> : Creates new clan\n" +
-                "§7/clan invite <player> : Invites player to your clan\n" +
-                "§7/clan kick <player> : Kicks player from your clan\n" +
-                "§7/clan invitations : Lists all pending invitations\n" +
-                "§7/clan accept <clan - rawName> : Accept invitation from clan\n" +
-                "§7/clan deny <clan - rawName> : Deny invitation from clan\n" +
-                "§7/clan leave : Leave current clan\n" +
-                "§7/clan destroy : Destroy your clan. All clan values will be lost!\n" +
-                "§7/clan info : Shows info about your clan\n" +
-                "§7/clan admin add <player> : Adds admin to your clan\n" +
-                "§7/clan admin remove <player> : Removes admin from your clan\n" +
-                "§7/clan bank note <value> : Creates bank note signed by your clan\n" +
-                "§7/clan bank apply : Applies note from your hand to clan bank\n" +
-                "§7/clan bank donate <value> : Gives money to clan bank\n" +
-                "§7/clan bank status: Shows your clan bank status\n" +
-                "§7/clan land create: Creates clan land\n" +
-                "§7/clan land remove: Removes clan land\n" +
-                "§7/clan home <create|remove|home>: Classic clan homes\n" +
-                "§7/clan listhome : Lists all homes\n" +
-                "§aYou can use clan chat by starting message with §6%§a!";
+        this.usage = "§7/clan create <name> : Tạo clan mới\n" +
+                "§7/clan invite <player> : Mời người chơi vào clan của ban\n" +
+                "§7/clan kick <player> : Kick người chơi khỏi clan của bạn\n" +
+                "§7/clan invitations : Danh sách lời mời vào clan của bạn\n" +
+                "§7/clan accept <clan(tên gốc)> : Chấp nhận lời mời vào clan\n" +
+                "§7/clan deny <clan(tân gốc)> : Từ chối lời mời vào clan\n" +
+                "§7/clan leave : Rời khỏi clan hiện tại\n" +
+                "§7/clan destroy : Xoá Clan của bạn. Tất cả mọi thứ của clan sẽ bị mất!\n" +
+                "§7/clan info : Thông tin về clam của bạn\n" +
+                "§7/clan admin add <player> : Thêm quyền admin cho người chơi chỉ định\n" +
+                "§7/clan admin remove <player> : Xoá quyền admin của người chơi chỉ định\n" +
+                "§7/clan bank note <value> : Tạo tiền giấy từ coins của ngân hàng clan\n" +
+                "§7/clan bank apply : Chuyển coins từ tiền giấy vào ngân hàng của clan\n" +
+                "§7/clan bank donate <value> : Chuyển tiền vào ngân hàng của clan\n" +
+                "§7/clan bank status: Xem thông tin ngân hàng của clan\n" +
+                "§7/clan land create: Tạo vùng đất\n" +
+                "§7/clan land remove: Xoá vùng đất\n" +
+                "§7/clan home <create|remove|home>: Lệnh clan home\n" +
+                "§7/clan listhome : Danh sách các homes\n" +
+                "§aBạn có thể chat với clan bằng cách chat bắt đầu bằng §6%§a!";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -60,7 +60,7 @@ public class ClanCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 
@@ -99,7 +99,7 @@ public class ClanCommand extends Command {
                 clan = this.loader.getClan(player);
 
                 if (clan == null){
-                    player.sendMessage("§c»§7You are not in any clan!");
+                    player.sendMessage("§c»§7Bạn không ở trong clan!");
                     break;
                 }
                 clan.kickPlayer(playerName, player);
@@ -115,7 +115,7 @@ public class ClanCommand extends Command {
 
                 clan = this.loader.getClan(player);
                 if (clan != null){
-                    player.sendMessage("§c»§7You are already in clan! If you want to switch clan, leave your clan first!");
+                    player.sendMessage("§c»§7Bạn đã ở trong clan! Nếu muốn chuyển clan vui lòng rời khỏi clan!");
                     break;
                 }
 
@@ -123,13 +123,13 @@ public class ClanCommand extends Command {
                 List<String> pendingInvites = config.getStringList("clanInvites");
 
                 if (!pendingInvites.remove(args[1])){
-                    player.sendMessage("§c»§7No invitation from §6"+args[1]+"§7 was found! Please ensure that you have entered right raw name.");
+                    player.sendMessage("§c»§7Không có lời mời từ §6"+args[1]+"§7! Hãy đảm bảo rằng bạn đã nhập đúng tên clan.");
                     break;
                 }
 
                 clan = this.loader.getClans().get(args[1]);
                 if (clan == null){
-                    player.sendMessage("§c»§7This clan does no longer exists!");
+                    player.sendMessage("§c»§7Clan này không tồn tại!");
                     config.set("clanInvites", pendingInvites);
                     config.save();
                     break;
@@ -148,14 +148,14 @@ public class ClanCommand extends Command {
                 List<String> invites = config.getStringList("clanInvites");
 
                 if (!invites.remove(args[1])){
-                    player.sendMessage("§c»§7No invitation from §6"+args[1]+"§7 was found! Please ensure that you have entered right raw name.");
+                    player.sendMessage("§c»§7Không có lời mời từ §6"+args[1]+"§7! Hãy đảm bảo rằng bạn đã nhập đúng tên clan.");
                     break;
                 }
 
                 config.set("clanInvites", invites);
                 config.save();
 
-                player.sendMessage("§6»§7You have denied invitation from clan §6"+args[1]+"§7!");
+                player.sendMessage("§6»§7Bạn đã chấp nhận lời mời từ clan §6"+args[1]+"§7!");
                 break;
             case "info":
                 clan = this.checkForClan(player);
@@ -207,13 +207,13 @@ public class ClanCommand extends Command {
 
                 switch (args[1]){
                     case "status":
-                        player.sendMessage("§a"+clan.getName()+"§a Clan:\n§3»§7 Money: §e"+clan.getMoney()+"§7/§6"+clan.getMaxMoney()+"$");
+                        player.sendMessage("§a"+clan.getName()+"§a Clan:\n§3»§7 Coins: §e"+clan.getMoney()+"§7/§6"+clan.getMaxMoney()+"$");
                     break;
                     case "note":
                         try {
                             clan.createBankNote(player, Integer.parseInt(args[2]));
                         }catch (Exception e){
-                            player.sendMessage("§c»§7Please provide numerical value!");
+                            player.sendMessage("§c»§7Vui lòng nhập giá trị là số!");
                         }
                         break;
                     case "apply":
@@ -225,19 +225,19 @@ public class ClanCommand extends Command {
                             boolean success = (EconomyAPI.getInstance().myMoney(player) - value) >= 0;
 
                             if (!success){
-                                player.sendMessage("§c»§7You do not have enough coins to donate!");
+                                player.sendMessage("§c»§7Bạn không có đủ tiền để chuyển!");
                                 break;
                             }
 
                             if (!clan.addMoney(value)){
-                                player.sendMessage("§c»§7Clan bank limit has been reached!");
+                                player.sendMessage("§c»§7Ngần hàng của clan đã đạt giời hạn!");
                                 break;
                             }
 
                             EconomyAPI.getInstance().reduceMoney(player, value);
                             clan.onDonate(player, value);
                         }catch (Exception e){
-                            player.sendMessage("§c»§7Please provide numerical value!");
+                            player.sendMessage("§c»§7Vui lòng nhập giá trị là số!");
                         }
                     default:
                         player.sendMessage(this.getUsageMessage());
@@ -305,7 +305,7 @@ public class ClanCommand extends Command {
                 int homeLimit = clan.getConfig().getInt("homeLimit");
                 player.sendMessage("§a"+clan.getName()+"§a Clan:\n" +
                         "§3»§7 Homes: §a"+clan.getHomes().size()+"§7/§2"+homeLimit+"\n" +
-                        "§3»§7Home List: §e"+String.join(", ", clan.getHomes().keySet()));
+                        "§3»§7Danh sách home: §e"+String.join(", ", clan.getHomes().keySet()));
                 break;
             default:
                 player.sendMessage(this.getUsageMessage());

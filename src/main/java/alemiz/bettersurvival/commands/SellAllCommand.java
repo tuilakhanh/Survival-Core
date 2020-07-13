@@ -10,9 +10,9 @@ public class SellAllCommand extends Command {
     public SurvivalShop loader;
 
     public SellAllCommand(String name, SurvivalShop loader) {
-        super(name, "Sell all items in your inventory", "");
+        super(name, "Bán tất cả đồ trong túi của bạn", "");
 
-        this.usage = "§7/sellall : Sell all items in your inventory";
+        this.usage = "§7/sellall : Bán tất cả đồ trong túi của bạn";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -26,7 +26,7 @@ public class SellAllCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 

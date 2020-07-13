@@ -16,11 +16,11 @@ public class TpaCommand extends Command {
     public MoreVanilla loader;
 
     public TpaCommand(String name, MoreVanilla loader) {
-        super(name, "Player Teleportation", "");
+            super(name, "Dịch chuyển người chơi", "");
 
-        this.usage = "§7/tpa <player> : Send request to player\n" +
-                "§7/tpa <a|accept> : Accept request and teleport player\n" +
-                "§7/tpa <d|denny> : Deny players request";
+        this.usage = "§7/tpa <player> : Gửi yêu cầu cho người chơi\n" +
+                "§7/tpa <a|accept> : Chấp nhận yêu cầu dịch chuyển tới\n" +
+                "§7/tpa <d|denny> : Từ chối yêu cầu";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -39,7 +39,7 @@ public class TpaCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 
@@ -47,15 +47,15 @@ public class TpaCommand extends Command {
 
         if (args.length < 1){
 
-            FormWindowSimple form = new FormWindowSimple("Player Teleport", "");
+                FormWindowSimple form = new FormWindowSimple("Dịch chuyển người chơi", "");
             List<Player> players = new ArrayList<>(this.loader.plugin.getServer().getOnlinePlayers().values());
             players.remove(player);
 
             if (players.isEmpty()){
-                form.setContent("§7All players are offline!");
+                form.setContent("§7Tất cả người chơi đã offline!");
             }else {
                 for (Player pplayer : players)
-                    form.addButton(new ElementButton("§5"+pplayer.getName()+"\n§7»Click to teleport"));
+                    form.addButton(new ElementButton("§5"+pplayer.getName()+"\n§7»Nhấn vào để dịch chuyển"));
             }
 
             player.showFormWindow(form);

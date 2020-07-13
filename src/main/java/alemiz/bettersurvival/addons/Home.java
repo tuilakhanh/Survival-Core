@@ -26,9 +26,9 @@ public class Home extends Addon {
         if (!configFile.exists("enable")){
             configFile.set("enable", true);
             configFile.set("homeLimit", 3);
-            configFile.set("homeTeleport", "§6»§7Woosh! Welcome at {home} §6@{player}!");
-            configFile.set("homeSet", "§6»§7Your home §6{home}§7 has been saved! You have §6{limit}§7 free homes!");
-            configFile.set("homeDel", "§6»§7Your home §6{home}§7 was deleted!");
+            configFile.set("homeTeleport", "§6»§7Woosh! Chào mừng tới {home} §6{player}!");
+            configFile.set("homeSet", "§6»§7Home của bạn §6{home}§7 đã được lưu! Bán có §6{limit}§7 home miễn phí!");
+            configFile.set("homeDel", "§6»§7Home của bạn §6{home}§7 đã được xoá!");
             configFile.save();
         }
     }
@@ -52,7 +52,7 @@ public class Home extends Addon {
 
         Set<String> homes = config.getSection("home").getKeys(false);
         if (homes.size() >= limit && !player.isOp()){
-            player.sendMessage("§6»§7Home limit reached!");
+            player.sendMessage("§6»§7Đã đạt giới hạn home!");
             return;
         }
 
@@ -64,7 +64,7 @@ public class Home extends Addon {
         String message = configFile.getString("homeSet");
         message = message.replace("{player}", player.getName());
         message = message.replace("{home}", home);
-        message = message.replace("{limit}", player.isOp()? "unlimited" : String.valueOf(limit - homes.size()));
+        message = message.replace("{limit}", player.isOp()? "không giới hạn" : String.valueOf(limit - homes.size()));
         player.sendMessage(message);
     }
 
@@ -77,7 +77,7 @@ public class Home extends Addon {
         if (config == null) return;
 
         if (!config.exists("home."+home.toLowerCase())){
-            player.sendMessage("§6»§7Home §6"+home+"§7 doesnt exist!");
+            player.sendMessage("§6»§7Home §6"+home+"§7 không tồn tại!");
             return;
         }
 
@@ -99,13 +99,13 @@ public class Home extends Addon {
         if (config == null) return;
 
         if (!config.exists("home."+home.toLowerCase())){
-            player.sendMessage("§6»§7Home §6"+home+"§7 doesnt exist!");
+            player.sendMessage("§6»§7Home §6"+home+"§7 không tồn tại!");
             return;
         }
 
         List<Integer> data = config.getIntegerList("home."+home.toLowerCase()+".pos");
         if (data == null || data.size() < 3){
-            player.sendMessage("§eError occurs while teleporting to home!");
+            player.sendMessage("§eCó lỗi xảy ra khi dịch chuyển đến home!");
             return;
         }
         Level level = this.plugin.getServer().getLevelByName(config.getString("home."+home.toLowerCase()+".level"));

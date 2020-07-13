@@ -11,9 +11,9 @@ public class EnchCommand extends Command {
     public SmithShop loader;
 
     public EnchCommand(String name, SmithShop loader) {
-        super(name, "Enchant your item", "");
+        super(name, "Enchant item của bạn", "");
 
-        this.usage = "§7/ench : Apply all possible enchants";
+        this.usage = "§7/ench : Enchant item";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -29,14 +29,14 @@ public class EnchCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 
         Player player = (Player) sender;
         Item inHand = player.getInventory().getItemInHand();
         if (inHand.getId() == Item.AIR){
-            player.sendMessage("§c»§r§7You must hold item!");
+            player.sendMessage("§c»§r§7Bạn phải cầm item!");
             return true;
         }
 

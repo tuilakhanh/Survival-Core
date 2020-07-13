@@ -13,9 +13,9 @@ public class FlyCommand extends Command {
     public MoreVanilla loader;
 
     public FlyCommand(String name, MoreVanilla loader) {
-        super(name, "Turn fly mode on/off", "");
+        super(name, "Bật/tắt fly", "");
 
-        this.usage = "§7/fly <player - optional> : Turn fly mode on/off";
+        this.usage = "§7/fly <player - optional> : Bật/tắt fly";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
@@ -34,7 +34,7 @@ public class FlyCommand extends Command {
         }
 
         if (!(sender instanceof Player)  && args.length < 1){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh này chỉ được sử dụng trong game!");
             return true;
         }
 

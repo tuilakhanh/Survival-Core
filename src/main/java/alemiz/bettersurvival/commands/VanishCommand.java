@@ -10,9 +10,9 @@ public class VanishCommand extends Command {
     public Troller loader;
 
     public VanishCommand(String name, Troller loader) {
-        super(name, "Allows the player to vanish", "");
+        super(name, "Cho phép người chơi tàn hình", "");
 
-        this.usage = "§7/vanish : Turn on/off ";
+        this.usage = "§7/vanish : Bật/tắt tàng hình ";
         this.setUsage(getUsageMessage());
 
         this.ignoreInHelpTexts = true;
@@ -29,7 +29,7 @@ public class VanishCommand extends Command {
         }
 
         if (!(sender instanceof Player)){
-            sender.sendMessage("§cThis command can be run only in game!");
+            sender.sendMessage("§cLệnh chỉ được sử dụng trong game!");
             return true;
         }
         this.loader.vanish((Player) sender);
