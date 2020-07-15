@@ -1,6 +1,7 @@
 package alemiz.bettersurvival.commands;
 
 import alemiz.bettersurvival.addons.clans.Clan;
+import alemiz.bettersurvival.addons.clans.ClanLand;
 import alemiz.bettersurvival.addons.clans.PlayerClans;
 import alemiz.bettersurvival.addons.myland.MyLandProtect;
 import alemiz.bettersurvival.utils.Addon;
@@ -259,6 +260,27 @@ public class ClanCommand extends Command {
                         break;
                     case "remove":
                         clan.removeLand(player);
+                        break;
+                    case "access":
+                        if (args.length < 3){
+                            player.sendMessage(this.getUsageMessage());
+                            break;
+                        }
+
+                        ClanLand land = clan.getLand();
+                        if (land == null){
+                            player.sendMessage("§c»§7Your clan has not land!");
+                            break;
+                        }
+                        if (!clan.getOwner().equalsIgnoreCase(player.getName())){
+                            player.sendMessage("§c»§7Land settings can be configured by clan owner only!");
+                            break;
+                        }
+
+                        boolean state = args[2].equalsIgnoreCase("on");
+                        land.setRestriction(state);
+                        land.save();
+                        player.sendMessage("§a»§7Land restrictions has been turned §6"+(state? "on" : "off")+"§7!");
                         break;
                     default:
                         player.sendMessage(this.getUsageMessage());

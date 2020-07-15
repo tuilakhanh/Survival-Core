@@ -14,6 +14,7 @@ import cn.nukkit.blockentity.BlockEntityChest;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.block.BlockBreakEvent;
+import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.level.LevelLoadEvent;
 import cn.nukkit.event.player.*;
 import cn.nukkit.Player;
@@ -77,7 +78,7 @@ public class MoreVanilla extends Addon{
             configFile.set("permission-manage", "bettersurvival.vanilla.manage");
 
             configFile.set("permission-fly", "bettersurvival.fly");
-            configFile.set("flyMessage", "§6»§7Bạn đã bật Fly §6{state}§7!");
+            configFile.set("flyMessage", "§6»§7Bạn đã §6{state}§7 Fly!");
 
             configFile.set("permission-tpa", "bettersurvival.tpa");
             configFile.set("tpaMessage", "§6»§7Yêu cầu dịch chuyển đã được gửi tới {player}§7!");
@@ -213,7 +214,9 @@ public class MoreVanilla extends Addon{
         Player player = event.getEntity();
         this.back.put(player.getName(), player.clone());
 
-        if (configFile.getBoolean("keepInvCommand") && this.keepInventory(player)){
+        if (configFile.getBoolean("keepInvCommand") && this.keepInventory(player) &&
+                (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK ||
+                player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION)){
             event.setKeepInventory(true);
             this.dropDeathItems(player, event.getDrops());
         }
@@ -317,7 +320,6 @@ public class MoreVanilla extends Addon{
 
         List<Item> keep = new ArrayList<>();
         boolean keepTools = player.hasPermission(configFile.getString("permission-keepinvTools"));
-        System.out.println(keepTools);
 
         PlayerInventory inv = player.getInventory();
         inv.clearAll();
@@ -413,7 +415,7 @@ public class MoreVanilla extends Addon{
 
         String message = configFile.getString("flyMessage");
         message = message.replace("{player}", player.getName());
-        message = message.replace("{state}", (!canFly ? "on" : "off"));
+        message = message.replace("{state}", (!canFly ? "bật" : "tắt"));
         player.sendMessage(message);
     }
 
