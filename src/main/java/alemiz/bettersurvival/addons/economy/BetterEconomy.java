@@ -208,7 +208,7 @@ public class BetterEconomy extends Addon {
         if (player == null) return;
 
         if (price < 1){
-            player.sendMessage("§c»§Please enter valid coins value!");
+            player.sendMessage("§c»§Vui lòng nhập giá trị hợp lệ!");
             return;
         }
 
