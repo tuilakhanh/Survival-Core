@@ -236,7 +236,7 @@ public class BetterLobby extends Addon {
         List<Vector3> positions = new ArrayList<>();
         for (String pos : this.configFile.getStringList("helpParticlePos")){
             String[] data = pos.split(",");
-            positions.add(new Vector3(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])));
+            positions.add(new Vector3(Double.parseDouble(data[0]), Double.parseDouble(data[1]), Double.parseDouble(data[2])));
         }
 
         List<String> helptexts = this.generateHelpParticleTexts();

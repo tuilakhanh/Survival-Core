@@ -93,10 +93,10 @@ public class SurvivalShop extends Addon {
             configFile.set("wrongFormat", "§c»§7Shop was not created! Use following format: Line 1: shop Line 2: category");
             configFile.set("shopSet", "§6»§7Shop was created successfully!");
 
-            configFile.set("messageSuccess", "§a»§7You have successfully bought §6{item}§7!");
-            configFile.set("messageFail", "§c»§7You dont have §e{money}§7 coins to buy §6{item}§7!");
+            configFile.set("messageSuccess", "§a»§7Bạn đã mua §6{item}§7!");
+            configFile.set("messageFail", "§c»§7Bạn không có đủ §e{money}§7 coins để mua §6{item}§7!");
 
-            configFile.set("sellAllMessage", "§6»§7All your inventory was sold. Total income: §e{money}§7!");
+            configFile.set("sellAllMessage", "§6»§7Đã bán tất cả đồ trong túi đồ. Tổng số tiền nhận được: §e{money}§7!");
             configFile.save();
         }
 
@@ -204,8 +204,12 @@ public class SurvivalShop extends Addon {
         }
 
         String[] lines = new String[]{configFile.getString("signTitle"), "§e"+oldLines[1], "", ""};
-        if (oldLines[2].equals("vip")){
-            lines[2] = "§5VIP Only";
+        switch (oldLines[2]){
+            case "vip":
+                lines[2] = "§5VIP Only";
+                break;
+            case "member":
+                lines[2] = "§bMember Only";
         }
 
         event.setCancelled(true);
@@ -237,9 +241,15 @@ public class SurvivalShop extends Addon {
         event.setCancelled(true);
 
         String[] lines = sign.getText();
-        if (lines[2].equals("§5VIP Only") && !player.hasPermission(configFile.getString("shopVipPermission"))){
-            player.sendMessage("§c»§7This shop is for VIP members only!");
-            return;
+        switch (lines[2]){
+            case "§5VIP Only":
+                if (player.hasPermission(configFile.getString("shopVipPermission"))) break;
+                player.sendMessage("§c»§7Shop này chỉ dành cho vip!");
+                return;
+            case "§bMember Only":
+                if (player.hasPermission("cube.subscriber")) break;
+                player.sendMessage("§c»§7Shop này chỉ dành cho Member!");
+                return;
         }
 
         ShopCategory category = this.getCategory(lines[1].substring(2).toLowerCase());
