@@ -3,6 +3,7 @@ package alemiz.bettersurvival.addons.shop;
 import alemiz.bettersurvival.addons.PlayerPermissions;
 import alemiz.bettersurvival.commands.SellAllCommand;
 import alemiz.bettersurvival.commands.SellCommand;
+import alemiz.bettersurvival.commands.SellHandCommand;
 import alemiz.bettersurvival.commands.ShopCommand;
 import alemiz.bettersurvival.utils.Addon;
 import alemiz.bettersurvival.utils.ConfigManager;
@@ -96,7 +97,8 @@ public class SurvivalShop extends Addon {
             configFile.set("messageSuccess", "§a»§7Bạn đã mua §6{item}§7!");
             configFile.set("messageFail", "§c»§7Bạn không có đủ §e{money}§7 coins để mua §6{item}§7!");
 
-            configFile.set("sellAllMessage", "§6»§7Đã bán tất cả đồ trong túi đồ. Tổng số tiền nhận được: §e{money}§7!");
+            configFile.set("sellAllMessage", "§6»§7Đã bán tất cả đồ trong túi đồ. Số tiền nhận được: §e{money}§7!");
+            configFile.set("sellHandMessage", "§6»§7Đã bán đồ trên tay. Số tiền nhận được: §e{money}§7!");
             configFile.save();
         }
 
@@ -127,6 +129,7 @@ public class SurvivalShop extends Addon {
         registerCommand("shop", new ShopCommand("shop", this));
         registerCommand("sell", new SellCommand("sell", this));
         registerCommand("sellall", new SellAllCommand("sellall", this));
+        registerCommand("sellhand", new SellHandCommand("sellhand", this));
     }
 
     @EventHandler
@@ -222,11 +225,17 @@ public class SurvivalShop extends Addon {
     public void onInteract(PlayerInteractEvent event){
         Player player = event.getPlayer();
 
-        if (this.smithShop != null && event.getItem() != null){
-            CompoundTag namedTag = event.getItem().getNamedTag();
-            if (namedTag != null && namedTag.getByte("enchant_orb") == 1){
+        if (this.smithShop != null){
+            if (event.getBlock().getId() == Block.ANVIL){
                 event.setCancelled(true);
-                return;
+            }
+
+            if (event.getItem() != null){
+                CompoundTag namedTag = event.getItem().getNamedTag();
+                if (namedTag != null && namedTag.getByte("enchant_orb") == 1){
+                    event.setCancelled(true);
+                    return;
+                }
             }
         }
 

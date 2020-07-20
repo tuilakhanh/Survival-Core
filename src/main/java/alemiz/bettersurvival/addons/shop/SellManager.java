@@ -7,9 +7,11 @@ import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.element.ElementStepSlider;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
+import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import me.onebone.economyapi.EconomyAPI;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -76,7 +78,7 @@ public class SellManager {
 
         ShopItem shopItem = category.getItem(itemIndex);
         if (shopItem == null){
-            player.sendMessage("§c»§7Unable to shell item. Item not found!");
+            player.sendMessage("§c»§7Unable to sell item. Item not found!");
             return;
         }
 
@@ -84,7 +86,7 @@ public class SellManager {
         item.setCount(count);
 
         if (!player.getInventory().contains(item)){
-            player.sendMessage("§c»§7Unable to shell item. You do not own this item!");
+            player.sendMessage("§c»§7Unable to sell item. You do not own this item!");
             return;
         }
 
@@ -127,6 +129,50 @@ public class SellManager {
         EconomyAPI.getInstance().addMoney(player, totalPrice);
 
         String message = this.loader.configFile.getString("sellAllMessage");
+        message = message.replace("{money}", String.valueOf(totalPrice));
+        player.sendMessage(message);
+    }
+
+    public void sellHand(Player player){
+        if (player == null) return;
+        PlayerInventory inv = player.getInventory();
+        Item handItem = inv.getItemInHand();
+
+        if (handItem.getId() == Item.AIR){
+            player.sendMessage("§c»§7Please hold an item in your hand!");
+            return;
+        }
+
+        ShopItem shopItem = null;
+        for (ShopCategory category : this.loader.getCategories().values()){
+            for (ShopItem sshopItem : category.getItems()){
+                if (!handItem.equals(sshopItem.getItemSample(), true, false)) continue;
+                shopItem = sshopItem;
+                break;
+            }
+        }
+
+        if (shopItem == null){
+            player.sendMessage("§c»§7Unknown item! Can not sold item in your hand.");
+            return;
+        }
+
+        int basePrice = shopItem.getSellPrice();
+        int count =0;
+
+        for (Item item : inv.getContents().values()){
+            if (item.equals(handItem, true, false)){
+                count += item.getCount();
+                inv.removeItem(item);
+            }
+        }
+
+        inv.removeItem(handItem);
+
+        int totalPrice = count * basePrice;
+        EconomyAPI.getInstance().addMoney(player, totalPrice);
+
+        String message = this.loader.configFile.getString("sellHandMessage");
         message = message.replace("{money}", String.valueOf(totalPrice));
         player.sendMessage(message);
     }
