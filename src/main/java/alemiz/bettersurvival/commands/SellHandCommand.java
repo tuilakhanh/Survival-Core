@@ -10,9 +10,9 @@ public class SellHandCommand extends Command {
     public SurvivalShop loader;
 
     public SellHandCommand(String name, SurvivalShop loader) {
-        super(name, "Sell all items from your hand", "");
+        super(name, "Bán đồ trên tay", "");
 
-        this.usage = "§7/sellhand : Sell all items in your inventory same as item in hand";
+        this.usage = "§7/sellhand : Bán tất cả đồ trên tay của bạn";
         this.setUsage(getUsageMessage());
 
         this.commandParameters.clear();
