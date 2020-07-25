@@ -51,10 +51,7 @@ public class SurvivalShop extends Addon {
 
     public SurvivalShop(String path){
         super("survivalshop", path);
-    }
 
-    @Override
-    public void postLoad() {
         JSONObject shopData = ConfigManager.getInstance().loadJson(ConfigManager.getInstance().ADDONS_PATH+"/shop.json");
         Set<String> categories = shopData.keySet();
 

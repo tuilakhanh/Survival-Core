@@ -24,10 +24,7 @@ public class PlayerClans extends Addon {
 
     public PlayerClans(String path) {
         super("playerclans", path);
-    }
 
-    @Override
-    public void postLoad() {
         for (SuperConfig config : ConfigManager.getInstance().loadAllFromFolder(ConfigManager.PATH+"/clans")){
             this.loadClan(config);
         }
