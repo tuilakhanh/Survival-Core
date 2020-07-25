@@ -11,6 +11,7 @@ import alemiz.bettersurvival.utils.fakeChest.FakeSlotChangeEvent;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.block.Block;
+import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.player.PlayerDropItemEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
@@ -274,6 +275,11 @@ public class BetterVoting extends Addon {
                 player.getInventory().addItem(item);
             }
 
+            if (player.hasPermission("tuilakhanh.guest")) {
+                Server.getInstance().dispatchCommand(new ConsoleCommandSender(), "lp user " + player.getName() + " clear");
+                Server.getInstance().dispatchCommand(new ConsoleCommandSender(), "lp user " + player.getName() + " parent set member");
+            }
+
             List<Vector3> positions = Geometry.circle(player, 1, 10);
             for (Vector3 pos : positions){
                 player.getLevel().addParticle(new HeartParticle(pos));
@@ -290,6 +296,7 @@ public class BetterVoting extends Addon {
             return false;
         }
         return true;
+
     }
 
     public void givekey(Player executor, String targetName, int count){
