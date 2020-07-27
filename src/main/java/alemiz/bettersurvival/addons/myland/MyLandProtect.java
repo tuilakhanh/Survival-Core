@@ -23,6 +23,7 @@ import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Position;
 import cn.nukkit.math.Vector3f;
+import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.Config;
 
 import java.util.*;
@@ -124,26 +125,31 @@ public class MyLandProtect extends Addon {
 
         String item = player.getInventory().getItemInHand().getName();
 
-        if (event.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK && item.equals(WAND)){
-            List<Block> blocks = new ArrayList<>();
+        this.plugin.getServer().getScheduler().scheduleDelayedTask(new Task() {
+            @Override
+            public void onRun(int i) {
+                if (event.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK && item.equals(WAND)){
+                    List<Block> blocks = new ArrayList<>();
 
-            if (selectors.containsKey(player.getName().toLowerCase())){
-                blocks = selectors.get(player.getName().toLowerCase());
+                    if (selectors.containsKey(player.getName().toLowerCase())){
+                        blocks = selectors.get(player.getName().toLowerCase());
+                    }
+
+                    if (blocks.size() >= 2) blocks.clear();
+
+                    blocks.add(event.getBlock());
+                    selectors.put(player.getName().toLowerCase(), blocks);
+
+                    String message = configFile.getString("landPosSelected");
+                    message = message.replace("{pos}", event.getBlock().x +", "+ event.getBlock().y +", "+ event.getBlock().z);
+                    message = message.replace("{player}", player.getName());
+                    message = message.replace("{select}", (blocks.size() == 1)? "thứ nhất" : "thứ hai");
+                    player.sendMessage(message);
+                    event.setCancelled();
+                    return;
+                }
             }
-
-            if (blocks.size() >= 2) blocks.clear();
-
-            blocks.add(event.getBlock());
-            selectors.put(player.getName().toLowerCase(), blocks);
-
-            String message = configFile.getString("landPosSelected");
-            message = message.replace("{pos}", event.getBlock().x +", "+ event.getBlock().y +", "+ event.getBlock().z);
-            message = message.replace("{player}", player.getName());
-            message = message.replace("{select}", (blocks.size() == 1)? "thứ nhất" : "thứ hai");
-            player.sendMessage(message);
-            event.setCancelled();
-            return;
-        }
+        }, 10);
 
         LandRegion region = this.getLandByPos(block, true);
         if (!this.interact(player, region, block)) {

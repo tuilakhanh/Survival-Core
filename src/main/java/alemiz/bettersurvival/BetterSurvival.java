@@ -55,6 +55,8 @@ public class BetterSurvival extends PluginBase implements Listener {
         this.getServer().getPluginManager().registerEvents(this, this);
         this.getLogger().info("§aEnabled BetterSurvival by §6Alemiz!");
         this.getLogger().info("Được chỉnh sửa bởi tuilakhanh");
+
+        this.registerPlaceholders();
     }
 
     @Override
@@ -130,6 +132,15 @@ public class BetterSurvival extends PluginBase implements Listener {
         Addon.loadAddon(BetterLobby.class, "better_lobby.yml");
     }
 
+    private void registerPlaceholders() {
+        if (this.getServer().getPluginManager().getPlugin("PlaceholderAPI") == null || this.getServer().getPluginManager().getPlugin("KotlinLib") == null)
+            return;
+        try {
+            Class.forName("alemiz.bettersurvival.utils.Placeholders");
+        } catch (Exception ignore) {
+        }
+    }
+
     public static BetterSurvival getInstance() {
         return instance;
     }
@@ -152,6 +163,10 @@ public class BetterSurvival extends PluginBase implements Listener {
 
     public String getClanName(Player p){
         Clan clan = ((PlayerClans) Addon.getAddon("playerclans")).getClan(p);
-        return clan.getName();
+        String name;
+        if (!(clan == null)) {
+            name = clan.getName();
+        } else name = "~";
+        return name;
     }
 }

@@ -651,8 +651,6 @@ public class MoreVanilla extends Addon{
         player.sendMessage(message);
     }
 
-
-
     public boolean keepInventory(Player player){
         return player != null && this.keepInvCache.getOrDefault(player.getName(), false);
     }
