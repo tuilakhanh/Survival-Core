@@ -54,9 +54,6 @@ public class FlyCommand extends Command {
             this.loader.fly(player, player.getName());
             return true;
         }
-
-        player = Server.getInstance().getPlayer(args[0]);
-        this.loader.fly(player, ((Player) sender).getName());
         return true;
     }
 }

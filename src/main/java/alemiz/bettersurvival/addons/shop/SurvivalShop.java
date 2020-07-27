@@ -216,6 +216,11 @@ public class SurvivalShop extends Addon {
                 break;
             case "member":
                 lines[2] = "§bMember Only";
+            case "":
+                break;
+            default:
+                //TODO: shop by rank
+                break;
         }
 
         event.setCancelled(true);
@@ -259,7 +264,7 @@ public class SurvivalShop extends Addon {
                 player.sendMessage("§c»§7Shop này chỉ dành cho vip!");
                 return;
             case "§bMember Only":
-                if (player.hasPermission("cube.subscriber")) break;
+                if (player.hasPermission("tuilakhanh.shop.member")) break;
                 player.sendMessage("§c»§7Shop này chỉ dành cho Member!");
                 return;
         }
