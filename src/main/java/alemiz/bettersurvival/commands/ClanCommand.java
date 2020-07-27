@@ -41,6 +41,8 @@ public class ClanCommand extends Command {
                 "§7/clan bank status: Xem thông tin ngân hàng của clan\n" +
                 "§7/clan land create: Tạo vùng đất\n" +
                 "§7/clan land remove: Xoá vùng đất\n" +
+                "§7/clan land access <on|off>: Cho member trong clan mở chest\n" +
+                "§7/clan land whitelist <add|remove|list|on|off> <value - optional>: Cho phép 1 menber trong clan mở chest\n" +
                 "§7/clan home <create|remove|home>: Lệnh clan home\n" +
                 "§7/clan listhome : Danh sách các homes\n" +
                 "§aBạn có thể chat với clan bằng cách chat bắt đầu bằng §6%§a!";
@@ -282,6 +284,13 @@ public class ClanCommand extends Command {
                         land.setRestriction(state);
                         land.save();
                         player.sendMessage("§a»§7Land restrictions has been turned §6"+(state? "on" : "off")+"§7!");
+                        break;
+                    case "whitelist":
+                        if (args.length < 3){
+                            player.sendMessage(this.getUsageMessage());
+                            break;
+                        }
+                        clan.landWhitelist(player, args[2], Arrays.copyOfRange(args, 3, args.length));
                         break;
                     default:
                         player.sendMessage(this.getUsageMessage());

@@ -1,17 +1,20 @@
 package alemiz.bettersurvival.commands;
 
-import alemiz.bettersurvival.addons.Home;
+import alemiz.bettersurvival.addons.myhomes.AddWarpForm;
+import alemiz.bettersurvival.addons.myhomes.MyHomes;
 import alemiz.bettersurvival.utils.Command;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 
+import java.util.Arrays;
+
 
 public class PlayerWarpCommand extends Command {
 
-    private final Home loader;
+    private final MyHomes loader;
 
-    public PlayerWarpCommand(String name, Home loader) {
+    public PlayerWarpCommand(String name, MyHomes loader) {
         super(name, "Dịch chuyển đến warp của người chơi khác", "");
         this.commandParameters.clear();
 
@@ -22,7 +25,7 @@ public class PlayerWarpCommand extends Command {
         this.setUsage(getUsageMessage());
 
         this.commandParameters.put("default", new CommandParameter[]{
-                new CommandParameter("action", false)
+                new CommandParameter("action", true)
         });
 
         this.loader = loader;
@@ -42,22 +45,22 @@ public class PlayerWarpCommand extends Command {
         Player player = (Player) sender;
 
         if (args.length < 1){
-            player.sendMessage(this.getUsageMessage());
+            this.loader.showWarpMenu(player);
             return true;
         }
 
         switch (args[0]){
             case "add":
-                this.loader.createWarp(player, args[1]);
+                new AddWarpForm(player, this.loader).buildForm().sendForm();
                 break;
             case "remove":
-                this.loader.deleteWarp(player, args[1]);
+                this.loader.deleteWarp(player, String.join(" ", Arrays.copyOfRange(args, 1, args.length)));
                 break;
             case "list":
-                this.loader.listWarps(player);
+                this.loader.showWarpMenu(player);
                 break;
             default:
-                this.loader.teleportToWarp(player, args[0]);
+                this.loader.teleportToWarp(player, String.join(" ", args));
                 break;
         }
         return true;
