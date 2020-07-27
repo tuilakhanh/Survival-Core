@@ -125,70 +125,70 @@ public class Clan {
         if (player == null) return;
 
         if (executor != null && !this.owner.equals(executor.getName())){
-            executor.sendMessage("§c»§7You do not have permission to manage clan admins!");
+            executor.sendMessage("§c»§7Bạn không có quyền để thức hiện!");
             return;
         }
 
         if (this.isAdmin(player)){
-            if (executor != null) executor.sendMessage("§c»§7Player is already admin of your clan!");
+            if (executor != null) executor.sendMessage("§c»§7Người chơi đã là admin clan của bạn!");
             return;
         }
 
         if (executor != null && executor.getName().equalsIgnoreCase(player)){
-            executor.sendMessage("§c»§7You can not add yourself as clan admin!");
+            executor.sendMessage("§c»§7Bạn khổng thể tự thêm bản thân làm admin!");
             return;
         }
 
         if (this.owner.equalsIgnoreCase(player)){
-            if (executor != null) executor.sendMessage("§c»§7You are clan owner! You can not be clan admin.!");
+            if (executor != null) executor.sendMessage("§c»§7Bạn đã là chủ clan! Bạn khổng thê làm clan admin.!");
             return;
         }
 
         this.admins.add(player.toLowerCase());
         this.savePlayerList();
-        this.sendMessage("§2Player §6@"+player+"§2 was promoted to clan admin!");
+        this.sendMessage("§2Người chơi §6@"+player+"§2 đã được chọ làm admin của clan!");
     }
 
     public void removeAdmin(String player, Player executor){
         if (player == null) return;
 
         if (executor != null && !this.owner.equals(executor.getName())){
-            executor.sendMessage("§c»§7You do not have permission to manage clan admins!");
+            executor.sendMessage("§c»§7Bạn không có quyền để thực hiện!");
             return;
         }
 
         if (!this.isAdmin(player.toLowerCase())){
-            if (executor != null) executor.sendMessage("§c»§7Player is not admin of your clan!");
+            if (executor != null) executor.sendMessage("§c»§7Người chơi không phải là admin clan của bạn!");
             return;
         }
 
         this.admins.remove(player.toLowerCase());
         this.savePlayerList();
-        this.sendMessage("§4Player §6@"+player+"§4 was demoted to clan member!");
+        this.sendMessage("§4Người chơi §6@"+player+"§4 đã bị giáng xuống làm member clan!");
     }
 
     public void invitePlayer(Player player, Player executor){
         if (player == null) return;
 
         if (executor != null && !this.owner.equals(executor.getName()) && !this.isAdmin(executor)){
-            executor.sendMessage("§c»§7You do not have permission to invite player to clan!");
+            executor.sendMessage("§c»§7Bạn không có quyền mời người chơi khác vào clan!");
             return;
         }
 
         if (this.players.contains(player.getName())){
-            if (executor != null) executor.sendMessage("§c»§7Player is already in your clan!");
+            if (executor != null) executor.sendMessage("§c»§7Người chơi đã ở trong clan!");
             return;
         }
 
         if (this.loader.getClan(player) != null){
-            if (executor != null) executor.sendMessage("§c»§7Player is already member of other clan!");
+            if (executor != null) executor.sendMessage("§c»§7Người chơi đã có clan!");
             return;
         }
 
         int limit = this.config.getInt("playerLimit");
         if (this.players.size() >= limit){
-            if (executor != null) executor.sendMessage("§c»§7Your clan player limit is §6"+limit+"§7 players. You can not add another player! " +
-                    "TIP: Upgrade your clan and get more player slots!");
+            if (executor != null) executor.sendMessage("§c»§7Giới hạn clan của bạn là §6"+limit+"§7 người! " +
+                    "TIP: Nâng cấp clan để được thêm slot!");
             return;
         }
 
@@ -199,18 +199,18 @@ public class Clan {
         config.set("clanInvites", pendingInvites);
         config.save();
 
-        player.sendMessage("§6»§7You was invited to join §6@"+this.name+" Clan! Use §6/clan accept <name> §7or§6 /clan deny <name> §7to manage your invite!");
-        if (executor != null) executor.sendMessage("§6»§7You have invited §6@"+player.getName()+"§7 to your clan!");
+        player.sendMessage("§6»§7Bạn có lời mời gia nhập từ Clan §6@"+this.name+"! Sử dụng §6/clan accept <tên> §7hoặc§6 /clan deny <tên> §7để quản lý lời mời!");
+        if (executor != null) executor.sendMessage("§6»§7Bạn đã mời §6@"+player.getName()+"§7 vào Clan!");
     }
 
     public void addPlayer(Player player){
         if (player == null) return;
 
-        this.sendMessage("Player §6@"+player.getName()+" joined your Clan!");
+        this.sendMessage("Người chơi §6@"+player.getName()+" gia nhập vào Clan!");
         this.players.add(player.getName());
         this.savePlayerList();
 
-        player.sendMessage("§6»§7You joined §6@"+this.name+"§7 Clan! Welcome to your new Home!");
+        player.sendMessage("§6»§7Bạn đã gia nhập Clan §6@"+this.name+"§7!");
     }
 
     public void kickPlayer(String playerName, Player executor){
@@ -238,38 +238,38 @@ public class Clan {
         }
 
         if (!this.players.contains(playerName)){
-            if (executor != null) executor.sendMessage("§c»§7Player §6@"+playerName+" is not member in your clan!");
+            if (executor != null) executor.sendMessage("§c»§7Người chơi §6@"+playerName+" không phải là thành viên clan!");
             return;
         }
 
-        this.sendMessage("Player §6@"+playerName+" was kicked from your clan!");
+        this.sendMessage("Người chơi §6@"+playerName+" đã bị kick khỏi clan!");
         this.players.remove(playerName);
         this.savePlayerList();
 
         Player player = Server.getInstance().getPlayer(playerName);
-        if (player != null) player.sendMessage("§c»§7You was kicked from §6@"+this.name+"§7 Clan!");
+        if (player != null) player.sendMessage("§c»§7Bạn đã bị kick khỏi clan §6@"+this.name+"§7!");
     }
 
     public void removePlayer(Player player){
         if (player == null) return;
 
         if (this.owner.equalsIgnoreCase(player.getName())){
-            player.sendMessage("§c»§7You are owner of this clan, you can not leave. If you want to cancel you clan use §e/clan destroy§7.");
+            player.sendMessage("§c»§7Bạn là chủ clan bạn không thể thoát clan. Sử dụng §e/clan destroy§7 để xóa clan.");
             return;
         }
 
         this.players.remove(player.getName());
-        this.sendMessage("Player @6"+player.getName()+" left your Clan!");
+        this.sendMessage("Người chơi @6"+player.getName()+" rời khỏi Clan!");
         this.savePlayerList();
 
-        player.sendMessage("§6»§7You left §6@"+this.name+"§7 Clan!");
+        player.sendMessage("§6»§7Bạn đã rời khỏi clan §6@"+this.name+"§7!");
     }
 
     public void createBankNote(Player player, int value){
         if (player == null || value == 0) return;
 
         if (!this.owner.equalsIgnoreCase(player.getName()) && !this.isAdmin(player)){
-            player.sendMessage("§c»§7You do not have permission to create clan bank note!");
+            player.sendMessage("§c»§7Bạn không có quyền tạo tiền giáy của clan!");
             return;
         }
 
@@ -292,7 +292,7 @@ public class Clan {
         Item item = player.getInventory().getItemInHand();
 
         if (item.getId() == Item.AIR){
-            player.sendMessage("§c»§r§7You must hold Bank Note item!");
+            player.sendMessage("§c»§r§7Bạn phải cầm tiền giấy!");
             return;
         }
         economy.applyNote(player, item, true);
@@ -302,7 +302,7 @@ public class Clan {
         if (player == null) return;
 
         if (!this.owner.equalsIgnoreCase(player.getName())){
-            player.sendMessage("§c»§7You do not have permission to create clan land!");
+            player.sendMessage("§c»§7Bạn không có quyền tạo clan!");
             return;
         }
 
@@ -318,7 +318,7 @@ public class Clan {
         if (player == null) return;
 
         if (!this.owner.equalsIgnoreCase(player.getName())){
-            player.sendMessage("§c»§7You do not have permission to remove clan land!");
+            player.sendMessage("§c»§7Bạn không có quyền xóa clan!");
             return;
         }
 
@@ -333,12 +333,12 @@ public class Clan {
     public void landWhitelist(Player player, String action, String[] args){
         ClanLand land = this.getLand();
         if (land == null){
-            player.sendMessage("§c»§7Your clan has not land!");
+            player.sendMessage("§c»§7Clan của bạn không có vùng đất!");
             return;
         }
 
         if (!this.owner.equalsIgnoreCase(player.getName())){
-            player.sendMessage("§c»§7Land settings can be configured by clan owner only!");
+            player.sendMessage("§c»§7Những cài đặt của clan chỉ có thể thay đổi bởi chủ clan!");
             return;
         }
 
@@ -361,7 +361,7 @@ public class Clan {
         boolean state = action.equalsIgnoreCase("on");
         land.setWhitelistEnabled(state);
         land.save();
-        player.sendMessage("§a»§7Land whitelist has been turned §6"+(state? "on" : "off")+"§7!");
+        player.sendMessage("§a»§7Land whitelist đang ở trạng thái §6"+(state? "on" : "off")+"§7!");
     }
 
     public ClanLand getLand(){
@@ -378,54 +378,54 @@ public class Clan {
         if (player == null) return;
 
         if (!this.owner.equalsIgnoreCase(player.getName()) && !this.isAdmin(player)){
-            player.sendMessage("§c»§7You do not have permission to create clan home!");
+            player.sendMessage("§c»§7Bạn không có quyền tạo home của clan!");
             return;
         }
 
         int homeLimit = this.config.getInt("homeLimit", 10);
         if (this.homes.size() >= homeLimit){
-            player.sendMessage("§c»§7Your clan has passed home limit which is §6"+homeLimit+"§7 homes!");
+            player.sendMessage("§c»§7Clan của bạn đã đạt giới hạn home là §6"+homeLimit+"§7 homes!");
             return;
         }
 
         if (this.homes.containsKey(name.toLowerCase())){
-            player.sendMessage("§c»§7Your clan has already home with same name!");
+            player.sendMessage("§c»§7Chùng tên rùi :3!");
             return;
         }
 
         this.homes.put(name.toLowerCase(), player.clone());
         this.saveHomes();
-        player.sendMessage("§6»§7Your have successfully created clan home!");
+        player.sendMessage("§6»§7Bạn đã tạo clan home!");
     }
 
     public void removeHome(Player player, String home){
         if (player == null) return;
 
         if (!this.owner.equals(player.getName()) && !this.isAdmin(player)){
-            player.sendMessage("§c»§7You do not have permission to remove clan home!");
+            player.sendMessage("§c»§7Bạn không có quyền để xóa clan home!");
             return;
         }
 
         if (!this.homes.containsKey(home.toLowerCase())){
-            player.sendMessage("§c»§7Clan home with name §6"+home+"§7 was not found!");
+            player.sendMessage("§c»§7Clan home với tên §6"+home+"§7 không tồn tại!");
             return;
         }
 
         this.homes.remove(home.toLowerCase());
         this.saveHomes();
-        player.sendMessage("§6»§7Your have successfully removed clan home!");
+        player.sendMessage("§6»§7Bạn đã xóa clan home!");
     }
 
     public void teleportToHome(Player player, String home){
         if (player == null) return;
 
         if (!this.homes.containsKey(home.toLowerCase())){
-            player.sendMessage("§c»§7Clan home with name §6"+home+"§7 was not found!");
+            player.sendMessage("§c»§7Clan home với tên §6\"+home+\"§7 không tồn tại!");
             return;
         }
 
         player.teleport(this.homes.get(home.toLowerCase()));
-        player.sendMessage("§6»§7Woosh! Welcome at clan home §6"+home+" @"+player.getName()+"§7!");
+        player.sendMessage("§6»§7Woosh! Chào mừng tới clan home §6"+home+" @"+player.getName()+"§7!");
     }
 
     //May be useful in feature
@@ -434,7 +434,7 @@ public class Clan {
     }
 
     public void onDonate(Player player, int value){
-        this.sendMessage("Player §6@"+player.getName()+"§f donated to clan bank value of §e"+TextUtils.formatBigNumber(value)+"$§f!");
+        this.sendMessage("Người chơi §6@"+player.getName()+"§fđã chuyển §e"+TextUtils.formatBigNumber(value)+"$§f vào ngân hàng của clan!");
     }
 
     public void chat(String message, Player player){
@@ -463,14 +463,14 @@ public class Clan {
         int homeLimit = this.config.getInt("homeLimit", 10);
 
         return "§a"+this.name+"§a Clan:\n" +
-                "§3»§7 Owner: "+this.owner+"\n" +
-                "§3»§7 Money: §e"+this.money+"§7/§6"+moneyLimit+"$\n" +
-                "§3»§7 Land: §e"+(this.hasLand()? "Yes" : "No")+"\n" +
-                "§3»§7 Admin List: §e"+(this.admins.size() == 0? "None" : String.join(", ", this.admins))+"\n" +
-                "§3»§7 Players: §c"+this.players.size()+"§7/§4"+playerLimit+"\n" +
-                "§3»§7 Player List: §e"+String.join(", ", this.players)+"\n" +
-                "§3»§7 Homes: §a"+this.homes.size()+"§7/§2"+homeLimit+"\n" +
-                "§3»§7 Home List: §e"+(this.homes.size() == 0? "None" : String.join(", ", this.homes.keySet()));
+                "§3»§7 CHủ: "+this.owner+"\n" +
+                "§3»§7 Coins: §e"+this.money+"§7/§6"+moneyLimit+"$\n" +
+                "§3»§7 Vùng đất: §e"+(this.hasLand()? "Có" : "Không")+"\n" +
+                "§3»§7 Danh sách admin: §e"+(this.admins.size() == 0? "Không có ai" : String.join(", ", this.admins))+"\n" +
+                "§3»§7 Thành viên: §c"+this.players.size()+"§7/§4"+playerLimit+"\n" +
+                "§3»§7 Danh sách thành viên: §e"+String.join(", ", this.players)+"\n" +
+                "§3»§7 Home: §a"+this.homes.size()+"§7/§2"+homeLimit+"\n" +
+                "§3»§7 Danh sách home: §e"+(this.homes.size() == 0? "None" : String.join(", ", this.homes.keySet()));
     }
 
     public String getRawName() {

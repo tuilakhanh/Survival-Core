@@ -17,7 +17,7 @@ public class AddWarpForm extends CustomForm {
     private transient List<WarpCategory> categories;
 
     public AddWarpForm(Player player, MyHomes loader){
-        super("Add Warp");
+        super("Thêm warp");
         this.player = player;
         this.loader = loader;
     }
@@ -25,9 +25,9 @@ public class AddWarpForm extends CustomForm {
     @Override
     public Form buildForm() {
         this.addElement(new ElementLabel("§7Player warps are places registered by players. Anyone can visit this places. You are able to create own warp too."));
-        this.addElement(new ElementInput("§7Enter warp name:", "The Gardens..."));
+        this.addElement(new ElementInput("§7Nhập tên warp:", "Vd: Khánh ĐB"));
 
-        ElementDropdown categoryDropdown = new ElementDropdown("§7Choose category:");
+        ElementDropdown categoryDropdown = new ElementDropdown("§7Chọn danh mục:");
         this.categories = new ArrayList<>(this.loader.getWarpCategories().values());
 
         for (WarpCategory category : this.categories){

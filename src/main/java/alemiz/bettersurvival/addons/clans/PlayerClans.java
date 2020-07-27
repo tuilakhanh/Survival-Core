@@ -43,7 +43,7 @@ public class PlayerClans extends Addon {
             configFile.set("homeLimit", 10);
             configFile.set("moneyLimit", 400000);
 
-            configFile.set("clanCreateMessage", "§6»§7New clan §6@{clan}§7 was created successfully!");
+            configFile.set("clanCreateMessage", "§6»§7Clan §6@{clan}§7 đã được tạo thành công!");
             configFile.save();
         }
 
@@ -90,7 +90,7 @@ public class PlayerClans extends Addon {
         if (player == null || name.isEmpty()) return null;
 
         if (this.getClan(player) != null){
-            player.sendMessage("§c»§7You are already in clan. Please leave it first. TIP: Use §6/clan leave§7 to leave clan.");
+            player.sendMessage("§c»§7Bạn đã ở trong clan. TIP: Sử dụng §6/clan leave§7 để thoát clan.");
             return null;
         }
 
@@ -99,9 +99,9 @@ public class PlayerClans extends Addon {
 
         boolean success = EconomyAPI.getInstance().reduceMoney(player, clanPrice) >= 1;
         if (!success){
-            player.sendMessage("§c»§7You do not have enough coins to pay clan fee." +
-                    " Clan fee consists of §e"+ TextUtils.formatBigNumber(clanPrice)+"$§7,\n" +
-                    "§c75%§f of this fee will be return to clan bank.");
+            player.sendMessage("§c»§7Bạn không có đủ coins để thanh toán phí clan." +
+                    " Phí của clan là §e"+ TextUtils.formatBigNumber(clanPrice)+"coin§7,\n" +
+                    "§c75%§f phí này sẽ được trả lại vào clan bank.");
             return null;
         }
 
@@ -132,7 +132,7 @@ public class PlayerClans extends Addon {
         if (player == null || clan == null) return;
 
         if (!clan.getOwner().equalsIgnoreCase(player.getName())){
-            player.sendMessage("§c»§7This command can be run only by Clan owner!");
+            player.sendMessage("§c»§7Lệnh này chỉ được thức hiện bởi chủ Clan!");
             return;
         }
 
@@ -140,13 +140,13 @@ public class PlayerClans extends Addon {
             clan.removeLand(player);
         }
 
-        clan.sendMessage("§cYour clan was destroyed!");
+        clan.sendMessage("§cBạn đã xóa clan!");
         this.clans.remove(clan.getRawName());
 
         File file = new File(ConfigManager.PATH+"/clans/"+clan.getRawName()+".yml");
         if (file.isFile()) file.delete();
 
-        player.sendMessage("§6»§7You have successfully closed your clan.");
+        player.sendMessage("§6»§7Bạn đã đóng clan của bạn.");
     }
 
     public void invite(String playerName, Player executor){
@@ -154,13 +154,13 @@ public class PlayerClans extends Addon {
 
         Clan clan = this.getClan(executor);
         if (clan == null){
-            executor.sendMessage("§c»§7You are not in any Clan!");
+            executor.sendMessage("§c»§7Bạn không ở trong clan!");
             return;
         }
 
         Player player = Server.getInstance().getPlayer(playerName);
         if (player ==  null){
-            executor.sendMessage("§c»§7Player §6@"+playerName+"§7 is not online!");
+            executor.sendMessage("§c»§7Người chơi §6@"+playerName+"§7 không online!");
             return;
         }
 
@@ -174,14 +174,14 @@ public class PlayerClans extends Addon {
         List<String> pendingInvites = config.getStringList("clanInvites");
 
         if (pendingInvites.isEmpty()) return;
-        StringBuilder builder = new StringBuilder("§3»§7You have new pending invites to this clans: ");
+        StringBuilder builder = new StringBuilder("§3»§7Bạn có lời mời tí clan: ");
 
         for (String invite : pendingInvites){
             builder.append("§6").append(invite).append("§7,");
         }
 
         player.sendMessage(builder.substring(0, builder.length()-1)+"!");
-        player.sendMessage("§6»§7TIP: Use §6/clan accept <name> §7or§6 /clan deny <name> §7to manage your invites!");
+        player.sendMessage("§6»§7TIP: Sử dụng §6/clan accept <name> §7or§6 /clan deny <name> §7để quản lý lời mời!");
     }
 
     public void clearInvitations(Player player){

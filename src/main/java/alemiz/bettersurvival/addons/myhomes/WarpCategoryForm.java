@@ -24,17 +24,17 @@ public class WarpCategoryForm extends SimpleForm {
     @Override
     public Form buildForm() {
         this.setTitle(this.category.getFormattedName() + " Warps");
-        this.setContent("§7Select warp you want to visit.");
+        this.setContent("§7Chọn warp mà bạn muốn đền.");
 
         this.warps = new ArrayList<>(this.category.getWarps().values());
         if (this.warps.isEmpty()){
-            this.setContent("§7Woops! Looks like this category is empty! Add your warp here!");
-            this.addButton(new ElementButton("§dAdd Warp"));
+            this.setContent("§7Djt me thằng khánh không chịu add warp");
+            this.addButton(new ElementButton("§dThêm warp"));
             return this;
         }
 
         for (PlayerWarp warp : this.warps){
-            this.addButton(new ElementButton("§d"+warp.getName()+"\n§7Owner: §8"+warp.getOwner()));
+            this.addButton(new ElementButton("§d"+warp.getName()+"\n§7Chủ: §8"+warp.getOwner()));
         }
         return this;
     }
@@ -43,7 +43,7 @@ public class WarpCategoryForm extends SimpleForm {
     public void handle(Player player) {
         if (player == null || this.getResponse() == null) return;
 
-        if (this.getResponse().getClickedButton().getText().equals("§dAdd Warp")){
+        if (this.getResponse().getClickedButton().getText().equals("§dThêm warp")){
             new AddWarpForm(player, this.loader).buildForm().sendForm();
             return;
         }

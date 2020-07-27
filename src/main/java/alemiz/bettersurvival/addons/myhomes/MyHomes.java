@@ -50,7 +50,7 @@ public class MyHomes extends Addon {
             configFile.set("homeTeleport", "§6»§7Woosh! Chào mừng tới {home} §6{player}!");
             configFile.set("homeSet", "§6»§7Home của bạn §6{home}§7 đã được lưu! Bán có §6{limit}§7 home miễn phí!");
             configFile.set("homeDel", "§6»§7Home của bạn §6{home}§7 đã được xoá!");
-            
+
             configFile.set("warpCategories", new ArrayList<>(Arrays.asList("Shop", "Farm", "Social", "Storage", "Game", "Guild", "Creations")));
             configFile.set("warpCreate", "§6»§7Warp §6{warp}§7 đã được tạo! Bạn có §6{limit}§7 warp miễn phí !");
             configFile.set("warpDelete", "§6»§7Warp §6{warp}§7 đã bị xóa!");

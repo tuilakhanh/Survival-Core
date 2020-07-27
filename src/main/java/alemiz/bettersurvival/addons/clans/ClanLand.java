@@ -34,12 +34,12 @@ public class ClanLand extends LandRegion {
         if (isAdmin) return true;
 
         if (whitelistEnabled && !this.whitelist.contains(player.getName().toLowerCase())){
-            player.sendMessage("§c»§7Your clan land has restricted access to whitelisted members only!");
+            player.sendMessage("§c»§7Đất của clan đã được giới hạn quyền, chỉ có thành viên trong whitelist mời có quyền!");
             throw new CancelException(false);
         }
 
         if (block != null && this.restriction && MyLandProtect.INTERACT_BLOCKS.get(block.getId())){
-            player.sendMessage("§c»§7Your clan restricted access to some blocks in the clan land!");
+            player.sendMessage("§c»§7Clan của bạn bị hạn chế quyền truy cập vào một số block trong vùng đất của clan!");
             throw new CancelException(false);
         }
         return true;
