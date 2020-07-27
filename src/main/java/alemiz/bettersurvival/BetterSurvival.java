@@ -1,6 +1,7 @@
 package alemiz.bettersurvival;
 
 import alemiz.bettersurvival.addons.*;
+import alemiz.bettersurvival.addons.clans.Clan;
 import alemiz.bettersurvival.addons.clans.PlayerClans;
 import alemiz.bettersurvival.addons.economy.BetterEconomy;
 import alemiz.bettersurvival.addons.myhomes.MyHomes;
@@ -147,5 +148,10 @@ public class BetterSurvival extends PluginBase implements Listener {
 
     public int getRestartTime() {
         return this.restartTime;
+    }
+
+    public String getClanName(Player p){
+        Clan clan = ((PlayerClans) Addon.getAddon("playerclans")).getClan(p);
+        return clan.getName();
     }
 }
